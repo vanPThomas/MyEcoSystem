@@ -7,15 +7,6 @@
 
 #include "./UI/UIManager.h"
 
-// Optional includes (for your project later)
-// #include <vector>
-// #include <string>
-// #include <cmath>
-// #include <random>
-// #include <sys/statvfs.h>
-// #include <SDL2/SDL.h>
-// #include <algorithm>
-
 int main(int argc, char **argv)
 {
 
