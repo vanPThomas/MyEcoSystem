@@ -1,5 +1,6 @@
 #pragma once
-struct DNA {
+struct DNA
+{
     float speed;
     float vision;
     float aggression;

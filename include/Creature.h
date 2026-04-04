@@ -1,4 +1,5 @@
-class Creature {
+class Creature
+{
 public:
     vector2 position;
     float energy, hungry, fear, age;

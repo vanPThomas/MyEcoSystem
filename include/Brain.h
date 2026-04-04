@@ -1,4 +1,5 @@
-class Brain {
+class Brain
+{
 public:
     struct ActionScore {
         std::string action;
