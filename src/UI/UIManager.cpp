@@ -20,7 +20,7 @@ UIManager::UIManager()
         return;
     }
 
-    window = glfwCreateWindow(1280, 800, "Ecosystem Simulator", NULL, NULL);  
+    window = glfwCreateWindow(1920, 1080, "Ecosystem Simulator", NULL, NULL);  
     if (!window)
     {
         std::cerr << "Failed to create GLFW window\n";
@@ -36,7 +36,7 @@ UIManager::UIManager()
     ImGui::CreateContext();
     io = &ImGui::GetIO();
 
-    // io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;   // I recommend enabling this
+    // io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     ImGui::StyleColorsDark();
 
@@ -67,10 +67,7 @@ bool UIManager::render()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Test Window");
-    ImGui::Text("Hello from Ecosystem Simulator!");
-    ImGui::Text("If you see this → ImGui is working!");
-    ImGui::End();
+    renderSimulationScreen();
 
     // Rendering
     ImGui::Render();
@@ -84,4 +81,14 @@ bool UIManager::render()
 
     glfwSwapBuffers(window);
     return true;
+}
+
+void UIManager::renderSimulationScreen()
+{
+    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
+
+    ImGui::Begin("Simulation Window");
+
+    ImGui::End();
 }

@@ -16,7 +16,10 @@ public:
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
 
+    int simulationScreenWidth = 1000;
+    int simulationScreenHeight = 1000;
+
     bool render();
 private:
-
+    void renderSimulationScreen();
 };
