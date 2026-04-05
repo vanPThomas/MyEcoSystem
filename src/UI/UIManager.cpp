@@ -68,7 +68,7 @@ bool UIManager::render()
     ImGui::NewFrame();
 
     renderSimulationScreen();
-
+    
     // Rendering
     ImGui::Render();
     int display_w, display_h;
@@ -89,6 +89,23 @@ void UIManager::renderSimulationScreen()
     ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
 
     ImGui::Begin("Simulation Window");
+
+    // Get the top-left position of the content region
+    ImVec2 origin = ImGui::GetCursorScreenPos();   // This is the key!
+
+    Creature testCreature(200.0f, 200.0f);
+
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
+
+    ImVec2 pos = ImVec2(
+        origin.x + testCreature.x,
+        origin.y + testCreature.y
+    );
+
+    drawList->AddCircleFilled(pos, 15.0f, IM_COL32(255, 100, 180, 255));
+
+    // Optional: Show some info
+    ImGui::Text("Creature at: (%.0f, %.0f)", testCreature.x, testCreature.y);
 
     ImGui::End();
 }

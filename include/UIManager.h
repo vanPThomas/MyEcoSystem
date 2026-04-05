@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include "Creature.h"
 
 class UIManager
 {
