@@ -16,6 +16,7 @@ add_compile_definitions(PROJECT_VERSION="${PROJECT_VERSION}")
 # MyEcoSystem
 add_executable(MyEcoSystem
     src/main.cpp
+    src/UI/UIManager.cpp
 
     # ImGui core
     imgui/imgui.cpp
