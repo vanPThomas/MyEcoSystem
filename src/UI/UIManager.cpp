@@ -91,7 +91,7 @@ void UIManager::renderSimulationScreen()
     ImGui::Begin("Simulation Window");
 
     // Get the top-left position of the content region
-    ImVec2 origin = ImGui::GetCursorScreenPos();   // This is the key!
+    ImVec2 origin = ImGui::GetCursorScreenPos();
 
     Creature testCreature(200.0f, 200.0f);
 
@@ -104,7 +104,7 @@ void UIManager::renderSimulationScreen()
 
     drawList->AddCircleFilled(pos, 15.0f, IM_COL32(255, 100, 180, 255));
 
-    // Optional: Show some info
+    // Show some info
     ImGui::Text("Creature at: (%.0f, %.0f)", testCreature.x, testCreature.y);
 
     ImGui::End();
