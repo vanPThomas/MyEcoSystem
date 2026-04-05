@@ -44,6 +44,12 @@ UIManager::UIManager()
     ImGui_ImplOpenGL3_Init("#version 130");
 
     ImGui::GetIO().FontGlobalScale = 1.0f;
+
+    // Seed random number generator once (at startup)
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    // Spawn the creature at a random position inside the simulation area
+    SpawnRandomCreature();
 }
 
 UIManager::~UIManager()
@@ -90,22 +96,30 @@ void UIManager::renderSimulationScreen()
 
     ImGui::Begin("Simulation Window");
 
-    // Get the top-left position of the content region
+    // Get the top-left corner of the window's content area
     ImVec2 origin = ImGui::GetCursorScreenPos();
 
-    Creature testCreature(200.0f, 200.0f);
-
-    ImDrawList* drawList = ImGui::GetWindowDrawList();
-
+    // Use the stored creature
     ImVec2 pos = ImVec2(
         origin.x + testCreature.x,
         origin.y + testCreature.y
     );
 
-    drawList->AddCircleFilled(pos, 15.0f, IM_COL32(255, 100, 180, 255));
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-    // Show some info
-    ImGui::Text("Creature at: (%.0f, %.0f)", testCreature.x, testCreature.y);
+    drawList->AddCircleFilled(
+        pos,
+        15.0f,
+        IM_COL32(255, 100, 180, 255)
+    );
 
     ImGui::End();
+}
+
+void UIManager::SpawnRandomCreature()
+{
+    float randomX = static_cast<float>(rand() % simulationScreenWidth);
+    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+
+    testCreature = Creature(randomX, randomY);
 }

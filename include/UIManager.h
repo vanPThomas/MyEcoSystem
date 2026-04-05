@@ -7,6 +7,8 @@
 #include <cstring>
 #include <cctype>
 #include "Creature.h"
+#include <cstdlib>   // for rand()
+#include <ctime>     // for time()
 
 class UIManager
 {
@@ -16,6 +18,10 @@ public:
 
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
+
+    Creature testCreature;
+
+    void SpawnRandomCreature();
 
     int simulationScreenWidth = 1000;
     int simulationScreenHeight = 1000;

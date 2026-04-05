@@ -5,6 +5,7 @@
 class Creature
 {
 public:
+    Creature() : x(0.0f), y(0.0f) {}
     Creature(float x, float y);
     float x = 100.0f;
     float y = 100.0f;
