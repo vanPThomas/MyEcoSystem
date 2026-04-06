@@ -29,7 +29,7 @@ private:
 
     // ==================== Reproduction ====================
     float fertility;       // how succesful reproduction could be
-    float sexdrive         // how willing it is to reproduce
+    float sexdrive;        // how willing it is to reproduce
     float mutationRate;    // how much mutation occurs in offspring
     float gestationTime;   // cooldown between births (in seconds)
 

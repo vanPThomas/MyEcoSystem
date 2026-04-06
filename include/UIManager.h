@@ -9,6 +9,7 @@
 #include "Creature.h"
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
+#include <vector>
 
 class UIManager
 {
@@ -20,6 +21,7 @@ public:
     ImGuiIO* io = nullptr;
 
     Creature testCreature;
+    ImVector<Creature> creatures;
 
     void SpawnRandomCreature();
 

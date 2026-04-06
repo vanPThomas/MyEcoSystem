@@ -49,7 +49,10 @@ UIManager::UIManager()
     srand(static_cast<unsigned int>(time(nullptr)));
 
     // Spawn the creature at a random position inside the simulation area
-    SpawnRandomCreature();
+    for (int i = 0; i < 10; i++)
+    {
+        SpawnRandomCreature();
+    }
 }
 
 UIManager::~UIManager()
@@ -99,19 +102,22 @@ void UIManager::renderSimulationScreen()
     // Get the top-left corner of the window's content area
     ImVec2 origin = ImGui::GetCursorScreenPos();
 
-    // Use the stored creature
-    ImVec2 pos = ImVec2(
-        origin.x + testCreature.x,
-        origin.y + testCreature.y
-    );
+    // Use the stored creatures
+    for (auto c: creatures)
+    {
+        ImVec2 pos = ImVec2(
+            origin.x + c.x,
+            origin.y + c.y
+        );
+        ImDrawList* drawList = ImGui::GetWindowDrawList();
+    
+        drawList->AddCircleFilled(
+            pos,
+            15.0f,
+            IM_COL32(255, 100, 180, 255)
+        );
+    }
 
-    ImDrawList* drawList = ImGui::GetWindowDrawList();
-
-    drawList->AddCircleFilled(
-        pos,
-        15.0f,
-        IM_COL32(255, 100, 180, 255)
-    );
 
     ImGui::End();
 }
@@ -122,4 +128,5 @@ void UIManager::SpawnRandomCreature()
     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
     testCreature = Creature(randomX, randomY);
+    creatures.push_back(testCreature);
 }
