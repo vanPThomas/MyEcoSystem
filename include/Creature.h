@@ -20,8 +20,8 @@ protected:
     float vy = 0.0f; // velocity y
 
     float energy, hungry, fear, age;
-    // DNA dna;
-    // Brain brain;
+    DNA dna;
+    Brain brain;
     
     // void moveForward(Vector2 target);
     // void fleeFrom(Vector2 threat);

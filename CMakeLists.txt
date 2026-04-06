@@ -18,8 +18,8 @@ add_executable(MyEcoSystem
     src/main.cpp
     src/UI/UIManager.cpp
     src/Creature/Creature.cpp
-    # src/Creature/DNA.cpp
-    # src/creature/Brain.cpp
+    src/Creature/DNA.cpp
+    src/Creature/Brain.cpp
     
     # ImGui core
     imgui/imgui.cpp
