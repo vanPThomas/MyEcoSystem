@@ -1,4 +1,5 @@
 #pragma once
+#include "DNA.h"
 
 class Brain
 {
@@ -27,4 +28,8 @@ private:
         Mating,
         Resting
     };
+
+    State currentState = State::Wandering;
+
+    const DNA& dna;     // the DNA belonging to this brain in question.
 };
