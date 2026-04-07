@@ -15,7 +15,7 @@ private:
 
     // ==================== Metabolism & Energy ====================
     float metabolism 50.0f;         // how fast energy is consumed (higher = needs more food)
-    float energyEfficiency 50.0f;         // how much energy gained from food, out of 100
+    float energyEfficiency 50.0f;   // how much energy gained from food, out of 100
 
     // ==================== Behavior & Personality ====================
     float aggression = 0.5f;        // 0.0 = peaceful, 1.0 = very aggressive
@@ -30,7 +30,7 @@ private:
     // ==================== Reproduction ====================
     float fertility = 0.8f;         // how succesful reproduction could be
     float sexdrive = 100.0f;        // how willing it is to reproduce
-    float mutationRate = 100.0f;    // how much mutation occurs in offspring
+    float mutationRate = 100.0f;    // how liekly mutation occurs in offspring, 0 - 100%
     float gestationTime = 10.0f;    // cooldown between births (in seconds)
 
     void mutate(float rate);
