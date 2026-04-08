@@ -1,8 +1,11 @@
 #include "Brain.h"
 
-Brain::Brain(){}
+Brain::Brain(const DNA& ownerDNA)
+    : dna(ownerDNA)
+{}
 
-void makeDecision()
+void Brain::update(float deltaTime)
 {
-    // to be implemented
+    // TODO: Update brain states based on DNA and environment
+    // For now, just a placeholder
 }

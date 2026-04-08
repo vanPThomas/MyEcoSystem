@@ -20,7 +20,7 @@ public:
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
 
-    Creature testCreature;
+    // Creature testCreature;
     ImVector<Creature> creatures;
 
     void SpawnRandomCreature();
@@ -31,4 +31,7 @@ public:
     bool render();
 private:
     void renderSimulationScreen();
+    void renderDataInspector();
+
+    int selectedCreatureIndex = -1;
 };

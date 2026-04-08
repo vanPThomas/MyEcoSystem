@@ -4,18 +4,18 @@ class DNA
 {
 public:
     DNA();
-private:
+public:
 
     // ==================== Core Physical Traits ====================
     float speed = 50.0f;            // movement speed
-    float visionRange 10.0f;        // how far the creature can see
+    float visionRange = 10.0f;      // how far the creature can see
     float size = 10.0f;             // affects collision, energy consumption, intimidation
     float strength = 500.0f;        // damage dealt when attacking / winning fights
     bool isMale = true;             // true: male, false: female
 
     // ==================== Metabolism & Energy ====================
-    float metabolism 50.0f;         // how fast energy is consumed (higher = needs more food)
-    float energyEfficiency 50.0f;   // how much energy gained from food, out of 100
+    float metabolism = 50.0f;       // how fast energy is consumed (higher = needs more food)
+    float energyEfficiency = 50.0f; // how much energy gained from food, out of 100
 
     // ==================== Behavior & Personality ====================
     float aggression = 0.5f;        // 0.0 = peaceful, 1.0 = very aggressive

@@ -77,6 +77,7 @@ bool UIManager::render()
     ImGui::NewFrame();
 
     renderSimulationScreen();
+    renderDataInspector();
     
     // Rendering
     ImGui::Render();
@@ -92,6 +93,7 @@ bool UIManager::render()
     return true;
 }
 
+// ====================== SIMULATION WINDOW ======================
 void UIManager::renderSimulationScreen()
 {
     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
@@ -122,11 +124,63 @@ void UIManager::renderSimulationScreen()
     ImGui::End();
 }
 
+// ====================== NEW: DATA INSPECTOR ======================
+void UIManager::renderDataInspector()
+{
+    ImGui::Begin("Creature Inspector");
+
+    if (selectedCreatureIndex < 0 || selectedCreatureIndex >= (int)creatures.size())
+    {
+        ImGui::Text("No creature selected.");
+        ImGui::Text("Click on a creature in the Simulation Window to inspect it.");
+    }
+    else
+    {
+        Creature& selected = creatures[selectedCreatureIndex];
+
+        ImGui::Text("Creature #%d", selectedCreatureIndex);
+        ImGui::Separator();
+
+        // === DNA Section ===
+        if (ImGui::CollapsingHeader("DNA", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Text("Speed:         %.1f", selected.dna.speed);
+            ImGui::Text("Vision Range:  %.1f", selected.dna.visionRange);
+            ImGui::Text("Size:          %.1f", selected.dna.size);
+            ImGui::Text("Strength:      %.1f", selected.dna.strength);
+            ImGui::Text("Is Male:       %s", selected.dna.isMale ? "Yes" : "No");
+            ImGui::Text("Metabolism:    %.2f", selected.dna.metabolism);
+            ImGui::Text("Aggression:    %.2f", selected.dna.aggression);
+            ImGui::Text("Mutation Rate: %.3f", selected.dna.mutationRate);
+            // Add more DNA fields as you like
+        }
+
+        ImGui::Separator();
+
+        // === Brain Section ===
+        if (ImGui::CollapsingHeader("Brain", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Text("State:         %s", 
+                selected.brain.currentState == Brain::State::Wandering ? "Wandering" :
+                selected.brain.currentState == Brain::State::SeekingFood ? "Seeking Food" : "Other");
+
+            ImGui::Text("Hunger:        %.2f", selected.brain.hunger);
+            ImGui::Text("Fear:          %.2f", selected.brain.fear);
+            ImGui::Text("Tiredness:     %.2f", selected.brain.tiredness);
+            ImGui::Text("Mating Drive:  %.2f", selected.brain.matingDrive);
+            ImGui::Text("Anger:         %.2f", selected.brain.anger);
+        }
+    }
+
+    ImGui::End();
+}
+
+// ====================== SPAWN ======================
 void UIManager::SpawnRandomCreature()
 {
     float randomX = static_cast<float>(rand() % simulationScreenWidth);
     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    testCreature = Creature(randomX, randomY);
-    creatures.push_back(testCreature);
+    Creature newCreature(randomX, randomY);
+    creatures.push_back(newCreature);
 }

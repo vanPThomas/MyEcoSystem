@@ -4,9 +4,9 @@
 class Brain
 {
 public:
-    Brain();
-
-private:
+    explicit Brain(const DNA& ownerDNA);
+    void update(float deltaTime);
+public:
     // ==================== Current Emotional / Mental State ====================
     float fear          = 0.0f;     // 0.0 calm → 1.0 terrified
     float hunger        = 0.0f;     // 0.0 full → 1.0 starving
