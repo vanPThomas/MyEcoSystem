@@ -94,37 +94,66 @@ bool UIManager::render()
 }
 
 // ====================== SIMULATION WINDOW ======================
+// void UIManager::renderSimulationScreen()
+// {
+//     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+//     ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
+
+//     ImGui::Begin("Simulation Window");
+
+//     // Get the top-left corner of the window's content area
+//     ImVec2 origin = ImGui::GetCursorScreenPos();
+
+//     // Use the stored creatures
+//     for (auto c: creatures)
+//     {
+//         ImVec2 pos = ImVec2(
+//             origin.x + c.x,
+//             origin.y + c.y
+//         );
+//         ImDrawList* drawList = ImGui::GetWindowDrawList();
+    
+//         drawList->AddCircleFilled(
+//             pos,
+//             15.0f,
+//             IM_COL32(255, 100, 180, 255)
+//         );
+//     }
+
+
+//     ImGui::End();
+// }
+
 void UIManager::renderSimulationScreen()
 {
-    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
+    ImGui::Begin("Simulation Window");     // Removed SetNext* for simplicity (you can keep them)
 
-    ImGui::Begin("Simulation Window");
-
-    // Get the top-left corner of the window's content area
     ImVec2 origin = ImGui::GetCursorScreenPos();
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-    // Use the stored creatures
-    for (auto c: creatures)
+    for (int i = 0; i < (int)creatures.size(); ++i)
     {
-        ImVec2 pos = ImVec2(
-            origin.x + c.x,
-            origin.y + c.y
-        );
-        ImDrawList* drawList = ImGui::GetWindowDrawList();
-    
-        drawList->AddCircleFilled(
-            pos,
-            15.0f,
-            IM_COL32(255, 100, 180, 255)
-        );
+        const auto& c = creatures[i];
+
+        ImVec2 pos(origin.x + c.x, origin.y + c.y);
+        float radius = c.dna.size;
+
+        // Choose color based on whether it's selected
+        ImU32 color = (i == selectedCreatureIndex) 
+            ? IM_COL32(255, 255, 100, 255)   // yellow when selected
+            : IM_COL32(80, 200, 255, 255);   // normal blue
+
+        drawList->AddCircleFilled(pos, radius, color);
+
+        // Optional: draw a thin border
+        drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
     }
 
-
+    handleCreatureSelection();
     ImGui::End();
 }
 
-// ====================== NEW: DATA INSPECTOR ======================
+// ====================== DATA INSPECTOR ======================
 void UIManager::renderDataInspector()
 {
     ImGui::Begin("Creature Inspector");
@@ -183,4 +212,43 @@ void UIManager::SpawnRandomCreature()
 
     Creature newCreature(randomX, randomY);
     creatures.push_back(newCreature);
+}
+
+// ====================== CREATURE SELECTION ======================
+void UIManager::handleCreatureSelection()
+{
+    // Only check for clicks when the Simulation Window is hovered
+    if (!ImGui::IsWindowHovered())
+        return;
+
+    // Check for left mouse click
+    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+    {
+        ImVec2 mousePos = ImGui::GetMousePos();           // Screen coordinates
+        ImVec2 windowPos = ImGui::GetWindowPos();
+        ImVec2 contentMin = ImGui::GetWindowContentRegionMin();
+
+        // Convert to world coordinates inside the simulation window
+        float worldX = mousePos.x - (windowPos.x + contentMin.x);
+        float worldY = mousePos.y - (windowPos.y + contentMin.y);
+
+        // Now check distance to every creature
+        selectedCreatureIndex = -1;     // deselect by default
+
+        for (int i = 0; i < (int)creatures.size(); ++i)
+        {
+            const Creature& c = creatures[i];
+
+            float dx = worldX - c.x;
+            float dy = worldY - c.y;
+            float distanceSquared = dx * dx + dy * dy;
+            float radius = c.dna.size + 5.0f;        // a bit of extra tolerance
+
+            if (distanceSquared <= radius * radius)
+            {
+                selectedCreatureIndex = i;
+                break;      // stop at the first one we hit
+            }
+        }
+    }
 }

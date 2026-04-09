@@ -33,5 +33,7 @@ private:
     void renderSimulationScreen();
     void renderDataInspector();
 
+    void handleCreatureSelection();
+
     int selectedCreatureIndex = -1;
 };
