@@ -6,6 +6,16 @@ class Brain
 public:
     explicit Brain(const DNA& ownerDNA);
     void update(float deltaTime);
+
+    float getFear(){return fear;}
+    float getHunger(){return hunger;}
+    float getTiredness(){return tiredness;}
+    float getAnger(){return anger;}
+    float getCuriosity(){return curiosity;}
+    float getMatingDrive(){return matingDrive;}
+    float getLastSeenFoodTime(){return lastSeenFoodTime;}
+    float getLastSeenPredatorTime(){return lastSeenPredatorTime;}
+    
 public:
     // ==================== Current Emotional / Mental State ====================
     float fear          = 0.0f;     // 0.0 calm → 1.0 terrified
