@@ -4,6 +4,27 @@ class DNA
 {
 public:
     DNA();
+
+    float getSpeed(){return speed;}
+    float getVisionRage(){return visionRange;}
+    float getSize(){return size;}
+    float getStrength(){return strength;}
+    bool getIsMale(){ return isMale;}
+    float getMetabolism(){return metabolism;}
+    float getEnergyEfficiency(){return energyEfficiency;}
+    float getAggression(){return aggression;}
+    float getCourage(){return courage;}
+    float getCuriosity(){return curiosity;}
+    float getGregariousness(){return gregariousness;}
+    float getLeaderCoefficient(){return leaderCoefficient;}
+    float getStealth(){return stealth;}
+    float getCreativity(){return creativity;}
+    float getIntelligence(){return intelligence;}
+    float getFertility(){return fertility;}
+    float getSexDrive(){return sexdrive;}
+    float getMutationRate(){return mutationRate;}
+    float getGestationTime(){return gestationTime;}
+    
 public:
 
     // ==================== Core Physical Traits ====================
@@ -30,7 +51,7 @@ public:
     // ==================== Reproduction ====================
     float fertility = 0.8f;         // how succesful reproduction could be
     float sexdrive = 100.0f;        // how willing it is to reproduce
-    float mutationRate = 100.0f;    // how liekly mutation occurs in offspring, 0 - 100%
+    float mutationRate = 100.0f;    // how likely mutation occurs in offspring, 0 - 100%
     float gestationTime = 10.0f;    // cooldown between births (in seconds)
 
     void mutate(float rate);
