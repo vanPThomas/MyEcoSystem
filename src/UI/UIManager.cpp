@@ -173,15 +173,14 @@ void UIManager::renderDataInspector()
         // === DNA Section ===
         if (ImGui::CollapsingHeader("DNA", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            ImGui::Text("Speed:         %.1f", selected.dna.speed);
-            ImGui::Text("Vision Range:  %.1f", selected.dna.visionRange);
-            ImGui::Text("Size:          %.1f", selected.dna.size);
-            ImGui::Text("Strength:      %.1f", selected.dna.strength);
-            ImGui::Text("Is Male:       %s", selected.dna.isMale ? "Yes" : "No");
-            ImGui::Text("Metabolism:    %.2f", selected.dna.metabolism);
-            ImGui::Text("Aggression:    %.2f", selected.dna.aggression);
-            ImGui::Text("Mutation Rate: %.3f", selected.dna.mutationRate);
-            // Add more DNA fields as you like
+            ImGui::Text("Speed:         %.1f", selected.dna.getSpeed());
+            ImGui::Text("Vision Range:  %.1f", selected.dna.getVisionRange());
+            ImGui::Text("Size:          %.1f", selected.dna.getSize());
+            ImGui::Text("Strength:      %.1f", selected.dna.getStrength());
+            ImGui::Text("Is Male:       %s",   selected.dna.isMale() ? "Yes" : "No");
+            ImGui::Text("Metabolism:    %.2f", selected.dna.getMetabolism());
+            ImGui::Text("Aggression:    %.2f", selected.dna.getAggression());
+            ImGui::Text("Mutation Rate: %.3f", selected.dna.getMutationRate());
         }
 
         ImGui::Separator();
@@ -193,11 +192,12 @@ void UIManager::renderDataInspector()
                 selected.brain.currentState == Brain::State::Wandering ? "Wandering" :
                 selected.brain.currentState == Brain::State::SeekingFood ? "Seeking Food" : "Other");
 
-            ImGui::Text("Hunger:        %.2f", selected.brain.hunger);
-            ImGui::Text("Fear:          %.2f", selected.brain.fear);
-            ImGui::Text("Tiredness:     %.2f", selected.brain.tiredness);
-            ImGui::Text("Mating Drive:  %.2f", selected.brain.matingDrive);
-            ImGui::Text("Anger:         %.2f", selected.brain.anger);
+            ImGui::Text("State:         %s", stateName);
+            ImGui::Text("Hunger:        %.2f", selected.brain.getHunger());
+            ImGui::Text("Fear:          %.2f", selected.brain.getFear());
+            ImGui::Text("Tiredness:     %.2f", selected.brain.getTiredness());
+            ImGui::Text("Mating Drive:  %.2f", selected.brain.getMatingDrive());
+            ImGui::Text("Anger:         %.2f", selected.brain.getAnger());
         }
     }
 
