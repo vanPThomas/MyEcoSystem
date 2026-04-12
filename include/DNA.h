@@ -6,12 +6,14 @@ public:
     DNA();
 
     float getSpeed(){return speed;}
-    float getVisionRage(){return visionRange;}
+    float getVisionRange(){return visionRange;}
     float getSize(){return size;}
     float getStrength(){return strength;}
     bool getIsMale(){ return isMale;}
+
     float getMetabolism(){return metabolism;}
     float getEnergyEfficiency(){return energyEfficiency;}
+
     float getAggression(){return aggression;}
     float getCourage(){return courage;}
     float getCuriosity(){return curiosity;}
@@ -20,6 +22,7 @@ public:
     float getStealth(){return stealth;}
     float getCreativity(){return creativity;}
     float getIntelligence(){return intelligence;}
+    
     float getFertility(){return fertility;}
     float getSexDrive(){return sexdrive;}
     float getMutationRate(){return mutationRate;}

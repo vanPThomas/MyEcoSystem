@@ -178,8 +178,22 @@ void UIManager::renderDataInspector()
             ImGui::Text("Size:          %.1f", selected.dna.getSize());
             ImGui::Text("Strength:      %.1f", selected.dna.getStrength());
             ImGui::Text("Is Male:       %s",   selected.dna.isMale() ? "Yes" : "No");
+
             ImGui::Text("Metabolism:    %.2f", selected.dna.getMetabolism());
+            ImGui::Text("Energy efficiency: %.2f", selected.dna.getEnergyEfficiency());
+            
             ImGui::Text("Aggression:    %.2f", selected.dna.getAggression());
+            ImGui::Text("Courage:       %.2f", selected.dna.getCourage());
+            ImGui::Text("Curiosity:     %.2f", selected.dna.getCuriosity());
+            ImGui::Text("Gregariousness:%.2f", selected.dna.getGregariousness());
+            ImGui::Text("Leader Coefficient: %.2f", selected.dna.getLeaderCoefficient());
+            ImGui::Text("Stealth:       %.1f", selected.dna.getStealth());
+            ImGui::Text("Creativity:    %.1f", selected.dna.getCreativity());
+            ImGui::Text("Intelligence:  %.1f", selected.dna.getIntelligence());
+
+            ImGui::Text("Fertility:     %.1f", selected.dna.getFertility());
+            ImGui::Text("Sex Drive:     %.1f", selected.dna.getSexDrive());
+            ImGui::Text("Mutation Rate: %.1f", selected.dna.getMutationRate());
             ImGui::Text("Mutation Rate: %.3f", selected.dna.getMutationRate());
         }
 
