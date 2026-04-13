@@ -136,7 +136,7 @@ void UIManager::renderSimulationScreen()
         const auto& c = creatures[i];
 
         ImVec2 pos(origin.x + c.x, origin.y + c.y);
-        float radius = c.dna.size;
+        float radius = c.dna.getSize();
 
         // Choose color based on whether it's selected
         ImU32 color = (i == selectedCreatureIndex) 
@@ -173,28 +173,28 @@ void UIManager::renderDataInspector()
         // === DNA Section ===
         if (ImGui::CollapsingHeader("DNA", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            ImGui::Text("Speed:         %.1f", selected.dna.getSpeed());
-            ImGui::Text("Vision Range:  %.1f", selected.dna.getVisionRange());
-            ImGui::Text("Size:          %.1f", selected.dna.getSize());
-            ImGui::Text("Strength:      %.1f", selected.dna.getStrength());
-            ImGui::Text("Is Male:       %s",   selected.dna.isMale() ? "Yes" : "No");
+            ImGui::Text("Speed:             %.1f", selected.dna.getSpeed());
+            ImGui::Text("Vision Range:      %.1f", selected.dna.getVisionRange());
+            ImGui::Text("Size:              %.1f", selected.dna.getSize());
+            ImGui::Text("Strength:          %.1f", selected.dna.getStrength());
+            ImGui::Text("Is Male:           %s",   selected.dna.getIsMale() ? "Yes" : "No");
 
-            ImGui::Text("Metabolism:    %.2f", selected.dna.getMetabolism());
+            ImGui::Text("Metabolism:        %.2f", selected.dna.getMetabolism());
             ImGui::Text("Energy efficiency: %.2f", selected.dna.getEnergyEfficiency());
             
-            ImGui::Text("Aggression:    %.2f", selected.dna.getAggression());
-            ImGui::Text("Courage:       %.2f", selected.dna.getCourage());
-            ImGui::Text("Curiosity:     %.2f", selected.dna.getCuriosity());
-            ImGui::Text("Gregariousness:%.2f", selected.dna.getGregariousness());
-            ImGui::Text("Leader Coefficient: %.2f", selected.dna.getLeaderCoefficient());
-            ImGui::Text("Stealth:       %.1f", selected.dna.getStealth());
-            ImGui::Text("Creativity:    %.1f", selected.dna.getCreativity());
-            ImGui::Text("Intelligence:  %.1f", selected.dna.getIntelligence());
+            ImGui::Text("Aggression:        %.2f", selected.dna.getAggression());
+            ImGui::Text("Courage:           %.2f", selected.dna.getCourage());
+            ImGui::Text("Curiosity:         %.2f", selected.dna.getCuriosity());
+            ImGui::Text("Gregariousness:    %.2f", selected.dna.getGregariousness());
+            ImGui::Text("Leader Coefficient:%.2f", selected.dna.getLeaderCoefficient());
+            ImGui::Text("Stealth:           %.1f", selected.dna.getStealth());
+            ImGui::Text("Creativity:        %.1f", selected.dna.getCreativity());
+            ImGui::Text("Intelligence:      %.1f", selected.dna.getIntelligence());
 
-            ImGui::Text("Fertility:     %.1f", selected.dna.getFertility());
-            ImGui::Text("Sex Drive:     %.1f", selected.dna.getSexDrive());
-            ImGui::Text("Mutation Rate: %.1f", selected.dna.getMutationRate());
-            ImGui::Text("Mutation Rate: %.3f", selected.dna.getMutationRate());
+            ImGui::Text("Fertility:         %.1f", selected.dna.getFertility());
+            ImGui::Text("Sex Drive:         %.1f", selected.dna.getSexDrive());
+            ImGui::Text("Mutation Rate:     %.1f", selected.dna.getMutationRate());
+            ImGui::Text("Mutation Rate:     %.3f", selected.dna.getMutationRate());
         }
 
         ImGui::Separator();
@@ -202,9 +202,17 @@ void UIManager::renderDataInspector()
         // === Brain Section ===
         if (ImGui::CollapsingHeader("Brain", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            ImGui::Text("State:         %s", 
-                selected.brain.currentState == Brain::State::Wandering ? "Wandering" :
-                selected.brain.currentState == Brain::State::SeekingFood ? "Seeking Food" : "Other");
+            const char* stateName = "Unknown";
+
+            switch (selected.brain.getCurrentState())
+            {
+                case Brain::State::Wandering:    stateName = "Wandering";    break;
+                case Brain::State::SeekingFood:  stateName = "Seeking Food"; break;
+                case Brain::State::Fleeing:      stateName = "Fleeing";      break;
+                case Brain::State::Hunting:      stateName = "Hunting";      break;
+                case Brain::State::Mating:       stateName = "Mating";       break;
+                case Brain::State::Resting:      stateName = "Resting";      break;
+            }
 
             ImGui::Text("State:         %s", stateName);
             ImGui::Text("Hunger:        %.2f", selected.brain.getHunger());
@@ -256,7 +264,7 @@ void UIManager::handleCreatureSelection()
             float dx = worldX - c.x;
             float dy = worldY - c.y;
             float distanceSquared = dx * dx + dy * dy;
-            float radius = c.dna.size + 5.0f;        // a bit of extra tolerance
+            float radius = c.dna.getSize() + 5.0f;        // a bit of extra tolerance
 
             if (distanceSquared <= radius * radius)
             {

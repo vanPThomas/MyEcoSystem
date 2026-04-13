@@ -4,19 +4,30 @@
 class Brain
 {
 public:
+    // State machine
+    enum class State {
+        Wandering,
+        SeekingFood,
+        Fleeing,
+        Hunting,
+        Mating,
+        Resting
+    };
+
     explicit Brain(const DNA& ownerDNA);
     void update(float deltaTime);
 
-    float getFear(){return fear;}
-    float getHunger(){return hunger;}
-    float getTiredness(){return tiredness;}
-    float getAnger(){return anger;}
-    float getCuriosity(){return curiosity;}
-    float getMatingDrive(){return matingDrive;}
-    float getLastSeenFoodTime(){return lastSeenFoodTime;}
-    float getLastSeenPredatorTime(){return lastSeenPredatorTime;}
+    float getFear() const {return fear;}
+    float getHunger() const {return hunger;}
+    float getTiredness() const {return tiredness;}
+    float getAnger() const {return anger;}
+    float getCuriosity() const {return curiosity;}
+    float getMatingDrive() const {return matingDrive;}
+    float getLastSeenFoodTime() const {return lastSeenFoodTime;}
+    float getLastSeenPredatorTime() const {return lastSeenPredatorTime;}
+    State getCurrentState() const { return currentState; }
     
-public:
+private:
     // ==================== Current Emotional / Mental State ====================
     float fear          = 0.0f;     // 0.0 calm → 1.0 terrified
     float hunger        = 0.0f;     // 0.0 full → 1.0 starving
@@ -28,16 +39,6 @@ public:
     // ==================== Memory / Short-term State ====================
     float lastSeenFoodTime   = 0.0f;
     float lastSeenPredatorTime = 0.0f;
-
-    // State machine
-    enum class State {
-        Wandering,
-        SeekingFood,
-        Fleeing,
-        Hunting,
-        Mating,
-        Resting
-    };
 
     State currentState = State::Wandering;
 

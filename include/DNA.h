@@ -5,30 +5,30 @@ class DNA
 public:
     DNA();
 
-    float getSpeed(){return speed;}
-    float getVisionRange(){return visionRange;}
-    float getSize(){return size;}
-    float getStrength(){return strength;}
-    bool getIsMale(){ return isMale;}
+    float getSpeed() const {return speed;}
+    float getVisionRange() const {return visionRange;}
+    float getSize() const {return size;}
+    float getStrength() const {return strength;}
+    bool getIsMale() const { return isMale;}
 
-    float getMetabolism(){return metabolism;}
-    float getEnergyEfficiency(){return energyEfficiency;}
+    float getMetabolism() const {return metabolism;}
+    float getEnergyEfficiency() const {return energyEfficiency;}
 
-    float getAggression(){return aggression;}
-    float getCourage(){return courage;}
-    float getCuriosity(){return curiosity;}
-    float getGregariousness(){return gregariousness;}
-    float getLeaderCoefficient(){return leaderCoefficient;}
-    float getStealth(){return stealth;}
-    float getCreativity(){return creativity;}
-    float getIntelligence(){return intelligence;}
+    float getAggression() const {return aggression;}
+    float getCourage() const {return courage;}
+    float getCuriosity() const {return curiosity;}
+    float getGregariousness() const {return gregariousness;}
+    float getLeaderCoefficient() const {return leaderCoefficient;}
+    float getStealth() const {return stealth;}
+    float getCreativity() const {return creativity;}
+    float getIntelligence() const {return intelligence;}
     
-    float getFertility(){return fertility;}
-    float getSexDrive(){return sexdrive;}
-    float getMutationRate(){return mutationRate;}
-    float getGestationTime(){return gestationTime;}
+    float getFertility() const {return fertility;}
+    float getSexDrive() const {return sexdrive;}
+    float getMutationRate() const {return mutationRate;}
+    float getGestationTime() const {return gestationTime;}
     
-public:
+private:
 
     // ==================== Core Physical Traits ====================
     float speed = 50.0f;            // movement speed
