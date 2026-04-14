@@ -93,37 +93,6 @@ bool UIManager::render()
     return true;
 }
 
-// ====================== SIMULATION WINDOW ======================
-// void UIManager::renderSimulationScreen()
-// {
-//     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-//     ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
-
-//     ImGui::Begin("Simulation Window");
-
-//     // Get the top-left corner of the window's content area
-//     ImVec2 origin = ImGui::GetCursorScreenPos();
-
-//     // Use the stored creatures
-//     for (auto c: creatures)
-//     {
-//         ImVec2 pos = ImVec2(
-//             origin.x + c.x,
-//             origin.y + c.y
-//         );
-//         ImDrawList* drawList = ImGui::GetWindowDrawList();
-    
-//         drawList->AddCircleFilled(
-//             pos,
-//             15.0f,
-//             IM_COL32(255, 100, 180, 255)
-//         );
-//     }
-
-
-//     ImGui::End();
-// }
-
 void UIManager::renderSimulationScreen()
 {
     ImGui::Begin("Simulation Window");     // Removed SetNext* for simplicity (you can keep them)

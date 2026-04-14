@@ -4,7 +4,7 @@
 class Brain
 {
 public:
-    // State machine
+    // ====================== ENUM STATE MACHINE ======================
     enum class State {
         Wandering,
         SeekingFood,
@@ -17,6 +17,7 @@ public:
     explicit Brain(const DNA& ownerDNA);
     void update(float deltaTime);
 
+    // ====================== GETTERS ======================
     float getFear() const {return fear;}
     float getHunger() const {return hunger;}
     float getTiredness() const {return tiredness;}

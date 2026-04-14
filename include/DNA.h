@@ -4,7 +4,7 @@ class DNA
 {
 public:
     DNA();
-
+    // ====================== GETTERS ======================
     float getSpeed() const {return speed;}
     float getVisionRange() const {return visionRange;}
     float getSize() const {return size;}
