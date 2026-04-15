@@ -2,7 +2,7 @@
 
 std::mt19937 Utils::rng{ std::random_device{}() };
 
-float Utils::RandomFloat(float min, float max)
+float Utils::randomFloat(float min, float max)
 {
     if (min > max) std::swap(min, max);
     
@@ -10,7 +10,7 @@ float Utils::RandomFloat(float min, float max)
     return dist(rng);
 }
 
-int Utils::RandomInt(int min, int max)
+int Utils::randomInt(int min, int max)
 {
     if (min > max) std::swap(min, max);
     
