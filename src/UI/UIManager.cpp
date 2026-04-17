@@ -36,8 +36,6 @@ UIManager::UIManager()
     ImGui::CreateContext();
     io = &ImGui::GetIO();
 
-    // io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-
     ImGui::StyleColorsDark();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -95,7 +93,7 @@ bool UIManager::render()
 
 void UIManager::renderSimulationScreen()
 {
-    ImGui::Begin("Simulation Window");     // Removed SetNext* for simplicity (you can keep them)
+    ImGui::Begin("Simulation Window");
 
     ImVec2 origin = ImGui::GetCursorScreenPos();
     ImDrawList* drawList = ImGui::GetWindowDrawList();
@@ -114,7 +112,6 @@ void UIManager::renderSimulationScreen()
 
         drawList->AddCircleFilled(pos, radius, color);
 
-        // Optional: draw a thin border
         drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
     }
 
@@ -223,7 +220,7 @@ void UIManager::handleCreatureSelection()
         float worldX = mousePos.x - (windowPos.x + contentMin.x);
         float worldY = mousePos.y - (windowPos.y + contentMin.y);
 
-        // Now check distance to every creature
+        // check distance to every creature
         selectedCreatureIndex = -1;     // deselect by default
 
         for (int i = 0; i < (int)creatures.size(); ++i)
@@ -238,7 +235,7 @@ void UIManager::handleCreatureSelection()
             if (distanceSquared <= radius * radius)
             {
                 selectedCreatureIndex = i;
-                break;      // stop at the first one we hit
+                break;      // stop at the first one hit
             }
         }
     }
