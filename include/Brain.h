@@ -13,6 +13,7 @@ public:
         Mating,
         Resting
     };
+    DNA dna;     // the DNA belonging to this brain in question.
 
     explicit Brain(const DNA& ownerDNA);
     void update(float deltaTime);
@@ -30,7 +31,7 @@ public:
     
 private:
     // ==================== Current Emotional / Mental State ====================
-    float fear          = 0.0f;     // 0.0 calm → 1.0 terrified
+    float fear          = 0.5f;     // 0.0 calm → 1.0 terrified
     float hunger        = 0.0f;     // 0.0 full → 1.0 starving
     float tiredness     = 0.0f;
     float anger         = 0.0f;
@@ -42,6 +43,4 @@ private:
     float lastSeenPredatorTime = 0.0f;
 
     State currentState = State::Wandering;
-
-    const DNA& dna;     // the DNA belonging to this brain in question.
 };

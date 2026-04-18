@@ -139,28 +139,29 @@ void UIManager::renderDataInspector()
         // === DNA Section ===
         if (ImGui::CollapsingHeader("DNA", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            ImGui::Text("Speed:             %.1f", selected.dna.getSpeed());
-            ImGui::Text("Vision Range:      %.1f", selected.dna.getVisionRange());
-            ImGui::Text("Size:              %.1f", selected.dna.getSize());
-            ImGui::Text("Strength:          %.1f", selected.dna.getStrength());
-            ImGui::Text("Is Male:           %s",   selected.dna.getIsMale() ? "Yes" : "No");
+            auto& dna = selected.brain.dna;     // cleaner
+            ImGui::Text("Speed:             %.1f", dna.getSpeed());
+            ImGui::Text("Vision Range:      %.1f", dna.getVisionRange());
+            ImGui::Text("Size:              %.1f", dna.getSize());
+            ImGui::Text("Strength:          %.1f", dna.getStrength());
+            ImGui::Text("Is Male:           %s",   dna.getIsMale() ? "Yes" : "No");
 
-            ImGui::Text("Metabolism:        %.2f", selected.dna.getMetabolism());
-            ImGui::Text("Energy efficiency: %.2f", selected.dna.getEnergyEfficiency());
+            ImGui::Text("Metabolism:        %.2f", dna.getMetabolism());
+            ImGui::Text("Energy efficiency: %.2f", dna.getEnergyEfficiency());
             
-            ImGui::Text("Aggression:        %.2f", selected.dna.getAggression());
-            ImGui::Text("Courage:           %.2f", selected.dna.getCourage());
-            ImGui::Text("Curiosity:         %.2f", selected.dna.getCuriosity());
-            ImGui::Text("Gregariousness:    %.2f", selected.dna.getGregariousness());
-            ImGui::Text("Leader Coefficient:%.2f", selected.dna.getLeaderCoefficient());
-            ImGui::Text("Stealth:           %.1f", selected.dna.getStealth());
-            ImGui::Text("Creativity:        %.1f", selected.dna.getCreativity());
-            ImGui::Text("Intelligence:      %.1f", selected.dna.getIntelligence());
+            ImGui::Text("Aggression:        %.2f", dna.getAggression());
+            ImGui::Text("Courage:           %.2f", dna.getCourage());
+            ImGui::Text("Curiosity:         %.2f", dna.getCuriosity());
+            ImGui::Text("Gregariousness:    %.2f", dna.getGregariousness());
+            ImGui::Text("Leader Coefficient:%.2f", dna.getLeaderCoefficient());
+            ImGui::Text("Stealth:           %.1f", dna.getStealth());
+            ImGui::Text("Creativity:        %.1f", dna.getCreativity());
+            ImGui::Text("Intelligence:      %.1f", dna.getIntelligence());
 
-            ImGui::Text("Fertility:         %.1f", selected.dna.getFertility());
-            ImGui::Text("Sex Drive:         %.1f", selected.dna.getSexDrive());
-            ImGui::Text("Mutation Rate:     %.1f", selected.dna.getMutationRate());
-            ImGui::Text("Mutation Rate:     %.3f", selected.dna.getMutationRate());
+            ImGui::Text("Fertility:         %.1f", dna.getFertility());
+            ImGui::Text("Sex Drive:         %.1f", dna.getSexDrive());
+            ImGui::Text("Mutation Rate:     %.1f", dna.getMutationRate());
+            ImGui::Text("Mutation Rate:     %.3f", dna.getMutationRate());
         }
 
         ImGui::Separator();
