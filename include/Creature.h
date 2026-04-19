@@ -1,25 +1,25 @@
 #pragma once
 #include "Brain.h"
-#include "DNA.h"
 #include "MathUtils.h"
 
 class Creature
 {
 public:
-    Creature(float x, float y);
-    float x = 100.0f;
-    float y = 100.0f;
-    
-public:
+    Creature(float startX, float startY);
 
-    float vx = 0.0f; // velocity x
-    float vy = 0.0f; // velocity y
+    void update(float deltaTime);   // Main update function
 
-    float tx = 0.0f; // target y
-    float ty = 0.0f; // target y
+    float x = 0.0f;
+    float y = 0.0f;
 
-    float energy, hungry, fear, age;
-    DNA dna;
+    float vx = 0.0f;   // velocity x
+    float vy = 0.0f;   // velocity y
+
+    float tx = 0.0f;   // current target x
+    float ty = 0.0f;   // current target y
+
     Brain brain;
 
-}; 
+    float energy = 100.0f;
+    float age    = 0.0f;
+};

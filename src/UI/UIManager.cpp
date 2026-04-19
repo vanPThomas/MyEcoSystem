@@ -67,12 +67,27 @@ bool UIManager::render()
     if (!window || glfwWindowShouldClose(window))
         return false;
 
-    glfwPollEvents();
+    
+    // ====================== CALCULATE DELTA TIME ======================
+    double currentTime = glfwGetTime();
+    deltaTime = static_cast<float>(currentTime - lastTime);
+    lastTime = currentTime;
+    
+    // Clamp deltaTime to avoid huge jumps
+    if (deltaTime > 0.1f)
+    deltaTime = 0.1f;
 
-    // Start a new ImGui frame
+    glfwPollEvents();
+    // Start ImGui frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    // Update all creatures with deltaTime
+    for (auto& creature : creatures)
+    {
+        creature.update(deltaTime);
+    }
 
     renderSimulationScreen();
     renderDataInspector();
@@ -103,7 +118,7 @@ void UIManager::renderSimulationScreen()
         const auto& c = creatures[i];
 
         ImVec2 pos(origin.x + c.x, origin.y + c.y);
-        float radius = c.dna.getSize();
+        float radius = c.brain.dna.getSize();
 
         // Choose color based on whether it's selected
         ImU32 color = (i == selectedCreatureIndex) 
@@ -231,7 +246,7 @@ void UIManager::handleCreatureSelection()
             float dx = worldX - c.x;
             float dy = worldY - c.y;
             float distanceSquared = dx * dx + dy * dy;
-            float radius = c.dna.getSize() + 5.0f;        // a bit of extra tolerance
+            float radius = c.brain.dna.getSize() + 5.0f;        // a bit of extra tolerance
 
             if (distanceSquared <= radius * radius)
             {

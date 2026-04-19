@@ -36,4 +36,8 @@ private:
     void handleCreatureSelection();
 
     int selectedCreatureIndex = -1;
+
+    // === deltaTime ===
+    double lastTime = 0.0;
+    float  deltaTime = 0.0f;
 };
