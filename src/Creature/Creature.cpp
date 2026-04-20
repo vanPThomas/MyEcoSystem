@@ -1,8 +1,10 @@
 #include "Creature.h"
 
-Creature::Creature(float startX, float startY)
+Creature::Creature(float startX, float startY, int spaceWidth, int spaceHeight)
     : x(startX)
     , y(startY)
+    , simulationSpaceWidth(spaceWidth)
+    , simulationSpaceHeight(spaceHeight)
     , brain(DNA())
 {
     // Give the creature an initial random target near its starting position
@@ -16,6 +18,7 @@ Creature::Creature(float startX, float startY)
 
 void Creature::update(float deltaTime)
 {
+    int creatureSize = brain.dna.getSize();
     // Age the creature
     age += deltaTime;
 
@@ -54,7 +57,26 @@ void Creature::update(float deltaTime)
     float movementCost = (vx*vx + vy*vy) * 0.001f;
     energy -= (brain.dna.getMetabolism() + movementCost) * deltaTime;
 
-    // Keep creature inside simulation bounds
-    if (x < 0) x = 0;
-    if (y < 0) y = 0;
+    // Clamp position and reset target if outside bounds
+    if (x < creatureSize)
+    {
+        x = creatureSize;
+        tx = creatureSize;
+    }
+    else if (x > simulationSpaceWidth - creatureSize)
+    {
+        x = simulationSpaceWidth - creatureSize;
+        tx = simulationSpaceWidth - creatureSize;
+    }
+
+    if (y < creatureSize)
+    {
+        y = creatureSize;
+        ty = creatureSize;
+    }
+    else if (y > simulationSpaceHeight - creatureSize)
+    {
+        y = simulationSpaceHeight - creatureSize;
+        ty = simulationSpaceHeight - creatureSize;
+    }
 }

@@ -214,7 +214,7 @@ void UIManager::SpawnRandomCreature()
     float randomX = static_cast<float>(rand() % simulationScreenWidth);
     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    Creature newCreature(randomX, randomY);
+    Creature newCreature(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
     creatures.push_back(newCreature);
 }
 

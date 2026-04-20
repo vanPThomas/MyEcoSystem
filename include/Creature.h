@@ -5,7 +5,7 @@
 class Creature
 {
 public:
-    Creature(float startX, float startY);
+    Creature(float startX, float startY, int spaceWidth, int spaceHeight);
 
     void update(float deltaTime);   // Main update function
 
@@ -22,4 +22,7 @@ public:
 
     float energy = 100.0f;
     float age    = 0.0f;
+
+    int simulationSpaceWidth = 1000;
+    int simulationSpaceHeight = 1000;
 };
