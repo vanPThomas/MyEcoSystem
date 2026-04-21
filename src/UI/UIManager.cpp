@@ -108,6 +108,9 @@ bool UIManager::render()
 
 void UIManager::renderSimulationScreen()
 {
+    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSizeConstraints( ImVec2(simulationScreenWidth, simulationScreenHeight), ImVec2(simulationScreenWidth, simulationScreenHeight));
     ImGui::Begin("Simulation Window");
 
     ImVec2 origin = ImGui::GetCursorScreenPos();

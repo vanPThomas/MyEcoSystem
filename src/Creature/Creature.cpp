@@ -11,7 +11,7 @@ Creature::Creature(float startX, float startY, int spaceWidth, int spaceHeight)
     tx = x + MathUtils::randomFloat(-100.0f, 100.0f);
     ty = y + MathUtils::randomFloat(-100.0f, 100.0f);
 
-    // Optional: give it a small random initial velocity
+    // Give it a small random initial velocity
     vx = MathUtils::randomFloat(-20.0f, 20.0f);
     vy = MathUtils::randomFloat(-20.0f, 20.0f);
 }
