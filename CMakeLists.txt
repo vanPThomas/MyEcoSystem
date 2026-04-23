@@ -21,6 +21,7 @@ add_executable(MyEcoSystem
     src/Creature/DNA.cpp
     src/Creature/Brain.cpp
     src/Utils/MathUtils.cpp
+    src/World/Plant.cpp
     
     # ImGui core
     imgui/imgui.cpp
