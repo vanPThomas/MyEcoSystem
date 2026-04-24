@@ -12,14 +12,18 @@ public:
     float x = 0.0f;
     float y = 0.0f;
 
+    
+    Brain brain;
+    
+    
+private:
+
     float vx = 0.0f;   // velocity x
     float vy = 0.0f;   // velocity y
 
     float tx = 0.0f;   // current target x
     float ty = 0.0f;   // current target y
-
-    Brain brain;
-
+    
     float energy = 100.0f;
     float age    = 0.0f;
 
