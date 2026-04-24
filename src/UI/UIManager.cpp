@@ -120,7 +120,7 @@ void UIManager::renderSimulationScreen()
     {
         const auto& c = creatures[i];
 
-        ImVec2 pos(origin.x + c.x, origin.y + c.y);
+        ImVec2 pos(origin.x + c.getXPos(), origin.y + c.getYPos());
         float radius = c.brain.dna.getSize();
 
         // Choose color based on whether it's selected
@@ -227,6 +227,8 @@ void UIManager::handleCreatureSelection()
     // Only check for clicks when the Simulation Window is hovered
     if (!ImGui::IsWindowHovered())
         return;
+        float x = 0.0f;
+        float y = 0.0f;
 
     // Check for left mouse click
     if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
@@ -246,8 +248,8 @@ void UIManager::handleCreatureSelection()
         {
             const Creature& c = creatures[i];
 
-            float dx = worldX - c.x;
-            float dy = worldY - c.y;
+            float dx = worldX - c.getXPos();
+            float dy = worldY - c.getYPos();
             float distanceSquared = dx * dx + dy * dy;
             float radius = c.brain.dna.getSize() + 5.0f;        // a bit of extra tolerance
 

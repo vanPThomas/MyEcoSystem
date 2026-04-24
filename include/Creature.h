@@ -8,15 +8,16 @@ public:
     Creature(float startX, float startY, int spaceWidth, int spaceHeight);
 
     void update(float deltaTime);   // Main update function
-
-    float x = 0.0f;
-    float y = 0.0f;
-
     
+    float getXPos() const {return x;}
+    float getYPos() const {return y;}
+
     Brain brain;
     
-    
 private:
+    
+    float x = 0.0f;
+    float y = 0.0f;
 
     float vx = 0.0f;   // velocity x
     float vy = 0.0f;   // velocity y
