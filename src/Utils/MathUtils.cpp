@@ -2,6 +2,7 @@
 
 std::mt19937 MathUtils::rng{ std::random_device{}() };
 
+// Generate random float
 float MathUtils::randomFloat(float min, float max)
 {
     if (min > max) std::swap(min, max);
@@ -10,6 +11,7 @@ float MathUtils::randomFloat(float min, float max)
     return dist(rng);
 }
 
+// Generate random integer
 int MathUtils::randomInt(int min, int max)
 {
     if (min > max) std::swap(min, max);

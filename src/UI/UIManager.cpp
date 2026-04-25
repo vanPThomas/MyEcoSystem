@@ -62,6 +62,7 @@ UIManager::~UIManager()
     glfwTerminate();
 }
 
+// ====================== RENDER UI ======================
 bool UIManager::render()
 {
     if (!window || glfwWindowShouldClose(window))
@@ -106,6 +107,7 @@ bool UIManager::render()
     return true;
 }
 
+// ====================== SIMULATION SCREEN ======================
 void UIManager::renderSimulationScreen()
 {
     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);

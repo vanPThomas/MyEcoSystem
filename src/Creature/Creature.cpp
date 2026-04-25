@@ -16,6 +16,7 @@ Creature::Creature(float startX, float startY, int spaceWidth, int spaceHeight)
     vy = MathUtils::randomFloat(-20.0f, 20.0f);
 }
 
+// Update creature information
 void Creature::update(float deltaTime)
 {
     int creatureSize = brain.dna.getSize();
