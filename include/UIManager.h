@@ -7,6 +7,7 @@
 #include <cstring>
 #include <cctype>
 #include "Creature.h"
+#include "Plant.h"
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
 #include <vector>
@@ -20,20 +21,22 @@ public:
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
 
-    // Creature testCreature;
     ImVector<Creature> creatures;
+    ImVector<Plant> plants;
 
-    void SpawnRandomCreature();
-
+    
     int simulationScreenWidth = 1000;
     int simulationScreenHeight = 1000;
-
+    
     bool render();
-private:
+    private:
     void renderSimulationScreen();
     void renderDataInspector();
-
+    
     void handleCreatureSelection();
+    
+    void SpawnRandomCreature();
+    void SpawnRandomPlant();
 
     int selectedCreatureIndex = -1;
 

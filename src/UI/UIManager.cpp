@@ -51,6 +51,10 @@ UIManager::UIManager()
     {
         SpawnRandomCreature();
     }
+    for (int i = 0; i < 20; i++)
+    {
+        SpawnRandomPlant();
+    }
 }
 
 UIManager::~UIManager()
@@ -221,6 +225,14 @@ void UIManager::SpawnRandomCreature()
 
     Creature newCreature(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
     creatures.push_back(newCreature);
+}
+void UIManager::SpawnRandomPlant()
+{
+    float randomX = static_cast<float>(rand() % simulationScreenWidth);
+    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+
+    Plant newPlant(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
+    plants.push_back(newPlant);
 }
 
 // ====================== CREATURE SELECTION ======================
