@@ -139,6 +139,23 @@ void UIManager::renderSimulationScreen()
         drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
     }
 
+    for (int i = 0; i < (int)plants.size(); ++i)
+    {
+        const auto& p = plants[i];
+
+        ImVec2 pos(origin.x + p.getXPos(), origin.y + p.getYPos());
+        float radius = p.getSize();
+
+        // Choose color based on whether it's selected
+        ImU32 color = (i == selectedCreatureIndex) 
+            ? IM_COL32(255, 255, 100, 255)  // yellow when selected
+            : IM_COL32(80, 0, 255, 255);    // normal purple
+
+        drawList->AddCircleFilled(pos, radius, color);
+
+        drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+    }
+
     handleCreatureSelection();
     ImGui::End();
 }

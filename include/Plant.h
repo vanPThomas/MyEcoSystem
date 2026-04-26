@@ -11,6 +11,7 @@ public:
     float getAge() const {return age;}
     float getXPos() const {return x;}
     float getYPos() const {return y;}
+    float getSize() const {return size;}
     
 private:
     float x = 0.0f;
@@ -19,6 +20,7 @@ private:
     float energyPerHealthPoint = 0.5f;   // how much energy is provided to creature per eaten health point
     float poisonLevel = 5.0f;   // how dangerous this plant is to eat, out of 10.
     float age = 0.0f;
+    float size = 5.0f;
     int simulationSpaceWidth = 1000;
     int simulationSpaceHeight = 1000;
 };
