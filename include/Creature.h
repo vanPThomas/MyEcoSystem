@@ -7,14 +7,15 @@ class Creature
 public:
     Creature(float startX, float startY, int spaceWidth, int spaceHeight);
 
-    void update(float deltaTime);   // Main update function
+    virtual ~Creature() = default;
+    virtual void update(float deltaTime);   // Main update function
     
     float getXPos() const {return x;}
     float getYPos() const {return y;}
 
     Brain brain;
     
-private:
+protected:
     
     float x = 0.0f;
     float y = 0.0f;
