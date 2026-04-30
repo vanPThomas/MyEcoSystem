@@ -1,6 +1,7 @@
 #pragma once
 #include "Brain.h"
 #include "MathUtils.h"
+#include "Environment.h"
 
 class Creature
 {
