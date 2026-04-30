@@ -3,7 +3,6 @@
 Plant::Plant(float startX, float startY, int spaceWidth, int spaceHeight)
     : x(startX)
     , y(startY)
-    , simulationSpaceWidth(spaceWidth)
-    , simulationSpaceHeight(spaceHeight)
+    , environment(environment)
 {
 }

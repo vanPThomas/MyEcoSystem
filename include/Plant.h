@@ -1,9 +1,10 @@
 #pragma once
+#include "Environment.h"
 
 class Plant
 {
 public:
-    Plant(float startX, float startY, int spaceWidth, int spaceHeight);
+    Plant(Environment& environment, float startX, float startY);
 
     float getHealthPoints() const {return healthPoints;}
     float getEnergyPerHealthPoint() const {return energyPerHealthPoint;}
@@ -21,6 +22,5 @@ private:
     float poisonLevel = 5.0f;   // how dangerous this plant is to eat, out of 10.
     float age = 0.0f;
     float size = 5.0f;
-    int simulationSpaceWidth = 1000;
-    int simulationSpaceHeight = 1000;
+    Environment& environment;
 };

@@ -1,10 +1,8 @@
 #include "Creature.h"
 
-Creature::Creature(Environment& environment, float startX, float startY, int spaceWidth, int spaceHeight)
+Creature::Creature(Environment& environment, float startX, float startY)
     : x(startX)
     , y(startY)
-    , simulationSpaceWidth(spaceWidth)
-    , simulationSpaceHeight(spaceHeight)
     , brain(DNA())
     , environment(environment)
 {

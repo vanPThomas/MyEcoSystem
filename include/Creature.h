@@ -30,8 +30,5 @@ protected:
     float energy = 100.0f;
     float age    = 0.0f;
 
-    int simulationSpaceWidth = 1000;
-    int simulationSpaceHeight = 1000;
-
     Environment& environment;
 };
