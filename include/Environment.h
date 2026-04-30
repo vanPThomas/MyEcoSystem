@@ -13,6 +13,10 @@ class Environment
 public:
     Environment(int width, int height);
 
+    float getSimulationSpaceWidth() const {return simulationSpaceWidth;}
+    float getSimulationSpaceHeight() const {return simulationSpaceHeight;}
+
+
 private:
     int simulationSpaceWidth = 1000;
     int simulationSpaceHeight = 1000;

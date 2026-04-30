@@ -6,7 +6,7 @@
 class Creature
 {
 public:
-    Creature(float startX, float startY, int spaceWidth, int spaceHeight);
+    Creature(Environment& environment, float startX, float startY);
 
     virtual ~Creature() = default;
     virtual void update(float deltaTime);   // Main update function
@@ -32,4 +32,6 @@ protected:
 
     int simulationSpaceWidth = 1000;
     int simulationSpaceHeight = 1000;
+
+    Environment& environment;
 };

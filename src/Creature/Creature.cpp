@@ -1,11 +1,12 @@
 #include "Creature.h"
 
-Creature::Creature(float startX, float startY, int spaceWidth, int spaceHeight)
+Creature::Creature(Environment& environment, float startX, float startY, int spaceWidth, int spaceHeight)
     : x(startX)
     , y(startY)
     , simulationSpaceWidth(spaceWidth)
     , simulationSpaceHeight(spaceHeight)
     , brain(DNA())
+    , environment(environment)
 {
     // Give the creature an initial random target near its starting position
     tx = x + MathUtils::randomFloat(-100.0f, 100.0f);
@@ -64,10 +65,10 @@ void Creature::update(float deltaTime)
         x = creatureSize;
         tx = creatureSize;
     }
-    else if (x > simulationSpaceWidth - creatureSize)
+    else if (x > environment.getSimulationSpaceWidth() - creatureSize)
     {
-        x = simulationSpaceWidth - creatureSize;
-        tx = simulationSpaceWidth - creatureSize;
+        x = environment.getSimulationSpaceWidth() - creatureSize;
+        tx = environment.getSimulationSpaceWidth() - creatureSize;
     }
 
     if (y < creatureSize)
@@ -75,9 +76,9 @@ void Creature::update(float deltaTime)
         y = creatureSize;
         ty = creatureSize;
     }
-    else if (y > simulationSpaceHeight - creatureSize)
+    else if (y > environment.getSimulationSpaceHeight() - creatureSize)
     {
-        y = simulationSpaceHeight - creatureSize;
-        ty = simulationSpaceHeight - creatureSize;
+        y = environment.getSimulationSpaceHeight() - creatureSize;
+        ty = environment.getSimulationSpaceHeight() - creatureSize;
     }
 }
