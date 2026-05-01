@@ -21,12 +21,6 @@ public:
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
 
-    // ImVector<Creature> creatures;
-    // ImVector<Plant> plants;
-
-    // int simulationScreenWidth = 1000;
-    // int simulationScreenHeight = 1000;
-    
     bool render();
     
 private:
@@ -35,9 +29,6 @@ private:
     void handleCreatureSelection();
 
     Environment& environment;
-    
-    // void SpawnRandomCreature();
-    // void SpawnRandomPlant();
 
     int selectedCreatureIndex = -1;
 
