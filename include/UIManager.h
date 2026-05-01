@@ -15,28 +15,29 @@
 class UIManager
 {
 public:
-    UIManager();
+    UIManager(Environment& env);
     ~UIManager();
 
     GLFWwindow* window = nullptr;
     ImGuiIO* io = nullptr;
 
-    ImVector<Creature> creatures;
-    ImVector<Plant> plants;
+    // ImVector<Creature> creatures;
+    // ImVector<Plant> plants;
 
-    
-    int simulationScreenWidth = 1000;
-    int simulationScreenHeight = 1000;
+    // int simulationScreenWidth = 1000;
+    // int simulationScreenHeight = 1000;
     
     bool render();
-    private:
+    
+private:
     void renderSimulationScreen();
     void renderDataInspector();
-    
     void handleCreatureSelection();
+
+    Environment& environment;
     
-    void SpawnRandomCreature();
-    void SpawnRandomPlant();
+    // void SpawnRandomCreature();
+    // void SpawnRandomPlant();
 
     int selectedCreatureIndex = -1;
 

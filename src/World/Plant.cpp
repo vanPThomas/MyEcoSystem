@@ -1,6 +1,6 @@
 #include "Plant.h"
 
-Plant::Plant(float startX, float startY, int spaceWidth, int spaceHeight)
+Plant::Plant(Environment& environment, float startX, float startY)
     : x(startX)
     , y(startY)
     , environment(environment)

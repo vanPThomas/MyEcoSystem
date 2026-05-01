@@ -1,7 +1,8 @@
 #include "imgui.h"
 #include "UIManager.h"
 
-UIManager::UIManager()
+UIManager::UIManager(Environment& env)
+    : environment(env)
 {
     // GLFW Window Hints
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -47,14 +48,14 @@ UIManager::UIManager()
     srand(static_cast<unsigned int>(time(nullptr)));
 
     // Spawn the creature at a random position inside the simulation area
-    for (int i = 0; i < 10; i++)
-    {
-        SpawnRandomCreature();
-    }
-    for (int i = 0; i < 20; i++)
-    {
-        SpawnRandomPlant();
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     SpawnRandomCreature();
+    // }
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     SpawnRandomPlant();
+    // }
 }
 
 UIManager::~UIManager()
@@ -88,11 +89,14 @@ bool UIManager::render()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    // Update all creatures with deltaTime
-    for (auto& creature : creatures)
-    {
-        creature.update(deltaTime);
-    }
+    // // Update all creatures with deltaTime
+    // for (auto& creature : creatures)
+    // {
+    //     creature.update(deltaTime);
+    // }
+    
+    // Update the whole invironment
+    environment.update(deltaTime);
 
     renderSimulationScreen();
     renderDataInspector();
@@ -115,16 +119,16 @@ bool UIManager::render()
 void UIManager::renderSimulationScreen()
 {
     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(simulationScreenWidth, simulationScreenHeight), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSizeConstraints( ImVec2(simulationScreenWidth, simulationScreenHeight), ImVec2(simulationScreenWidth, simulationScreenHeight));
+    ImGui::SetNextWindowSize(ImVec2(environment.getSimulationSpaceWidth(), environment.getSimulationSpaceHeight()), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSizeConstraints( ImVec2(environment.getSimulationSpaceWidth(), environment.getSimulationSpaceHeight()), ImVec2(environment.getSimulationSpaceWidth(), environment.getSimulationSpaceHeight()));
     ImGui::Begin("Simulation Window");
 
     ImVec2 origin = ImGui::GetCursorScreenPos();
     ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-    for (int i = 0; i < (int)creatures.size(); ++i)
+    for (int i = 0; i < (int)environment.creatures.size(); ++i)
     {
-        const auto& c = creatures[i];
+        const auto& c = *environment.creatures[i];
 
         ImVec2 pos(origin.x + c.getXPos(), origin.y + c.getYPos());
         float radius = c.brain.dna.getSize();
@@ -139,9 +143,9 @@ void UIManager::renderSimulationScreen()
         drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
     }
 
-    for (int i = 0; i < (int)plants.size(); ++i)
+    for (int i = 0; i < (int)environment.plants.size(); ++i)
     {
-        const auto& p = plants[i];
+        const auto& p = *environment.plants[i];
 
         ImVec2 pos(origin.x + p.getXPos(), origin.y + p.getYPos());
         float radius = p.getSize();
@@ -165,14 +169,14 @@ void UIManager::renderDataInspector()
 {
     ImGui::Begin("Creature Inspector");
 
-    if (selectedCreatureIndex < 0 || selectedCreatureIndex >= (int)creatures.size())
+    if (selectedCreatureIndex < 0 || selectedCreatureIndex >= (int)environment.creatures.size())
     {
         ImGui::Text("No creature selected.");
         ImGui::Text("Click on a creature in the Simulation Window to inspect it.");
     }
     else
     {
-        Creature& selected = creatures[selectedCreatureIndex];
+        Creature& selected = *environment.creatures[selectedCreatureIndex];
 
         ImGui::Text("Creature #%d", selectedCreatureIndex);
         ImGui::Separator();
@@ -235,22 +239,22 @@ void UIManager::renderDataInspector()
 }
 
 // ====================== SPAWN ======================
-void UIManager::SpawnRandomCreature()
-{
-    float randomX = static_cast<float>(rand() % simulationScreenWidth);
-    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+// void UIManager::SpawnRandomCreature()
+// {
+//     float randomX = static_cast<float>(rand() % simulationScreenWidth);
+//     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    Creature newCreature(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
-    creatures.push_back(newCreature);
-}
-void UIManager::SpawnRandomPlant()
-{
-    float randomX = static_cast<float>(rand() % simulationScreenWidth);
-    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+//     Creature newCreature(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
+//     creatures.push_back(newCreature);
+// }
+// void UIManager::SpawnRandomPlant()
+// {
+//     float randomX = static_cast<float>(rand() % simulationScreenWidth);
+//     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    Plant newPlant(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
-    plants.push_back(newPlant);
-}
+//     Plant newPlant(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
+//     plants.push_back(newPlant);
+// }
 
 // ====================== CREATURE SELECTION ======================
 void UIManager::handleCreatureSelection()
@@ -275,9 +279,9 @@ void UIManager::handleCreatureSelection()
         // check distance to every creature
         selectedCreatureIndex = -1;     // deselect by default
 
-        for (int i = 0; i < (int)creatures.size(); ++i)
+        for (int i = 0; i < (int)environment.creatures.size(); ++i)
         {
-            const Creature& c = creatures[i];
+            const Creature& c = *environment.creatures[i];
 
             float dx = worldX - c.getXPos();
             float dy = worldY - c.getYPos();

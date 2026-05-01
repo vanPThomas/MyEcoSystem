@@ -1,6 +1,10 @@
 #include "Environment.h"
+#include "Creature.h"
+#include "Plant.h"
 
 Environment::Environment(int width, int height)
+    : simulationSpaceWidth(width)
+    , simulationSpaceHeight(height)
 {
     // Seed random number generator once (at startup)
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -18,17 +22,28 @@ Environment::Environment(int width, int height)
 
 void Environment::SpawnRandomCreature()
 {
-    float randomX = static_cast<float>(rand() % simulationScreenWidth);
-    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
+    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
 
-    Creature newCreature(*this, randomX, randomY);
-    creatures.push_back(newCreature);
+    // Create unique_ptr and pass Environment reference
+    auto newCreature = std::make_unique<Creature>(*this, randomX, randomY);
+    creatures.push_back(std::move(newCreature));
 }
+
 void Environment::SpawnRandomPlant()
 {
-    float randomX = static_cast<float>(rand() % simulationScreenWidth);
-    float randomY = static_cast<float>(rand() % simulationScreenHeight);
+    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
+    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
 
-    Plant newPlant(*this, randomX, randomY);
-    plants.push_back(newPlant);
+    auto newPlant = std::make_unique<Plant>(*this, randomX, randomY);
+    plants.push_back(std::move(newPlant));
+}
+
+void Environment::update(float deltaTime)
+{
+    // Update all creatures with deltaTime
+    for (auto& creature : creatures)
+    {
+        creature->update(deltaTime);
+    }
 }
