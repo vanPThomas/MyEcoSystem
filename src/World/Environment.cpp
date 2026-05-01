@@ -16,19 +16,19 @@ Environment::Environment(int width, int height)
     }
 }
 
-void UIManager::SpawnRandomCreature()
+void Environment::SpawnRandomCreature()
 {
     float randomX = static_cast<float>(rand() % simulationScreenWidth);
     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    Creature newCreature(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
+    Creature newCreature(*this, randomX, randomY);
     creatures.push_back(newCreature);
 }
-void UIManager::SpawnRandomPlant()
+void Environment::SpawnRandomPlant()
 {
     float randomX = static_cast<float>(rand() % simulationScreenWidth);
     float randomY = static_cast<float>(rand() % simulationScreenHeight);
 
-    Plant newPlant(randomX, randomY, simulationScreenWidth, simulationScreenHeight);
+    Plant newPlant(*this, randomX, randomY);
     plants.push_back(newPlant);
 }

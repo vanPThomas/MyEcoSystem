@@ -1,7 +1,5 @@
 #pragma once
 #include <vector>
-// #include "Creature.h"
-// #include "Plant.h"
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
 
@@ -15,6 +13,9 @@ public:
 
     float getSimulationSpaceWidth() const {return simulationSpaceWidth;}
     float getSimulationSpaceHeight() const {return simulationSpaceHeight;}
+
+    void SpawnRandomCreature();
+    void SpawnRandomPlant();
 
 
 private:
