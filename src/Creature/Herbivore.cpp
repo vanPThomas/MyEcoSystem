@@ -1,7 +1,7 @@
 #include "Herbivore.h"
 
-Herbivore::Herbivore(float startX, float startY, int spaceWidth, int spaceHeight)
-    : Creature(startX, startY, spaceWidth, spaceHeight)
+Herbivore::Herbivore(Environment& environment, float startX, float startY)
+    : Creature(startX, startY)
 {
     // Herbivore-specific default DNA adjustments
     brain.dna.speed = 45.0f;

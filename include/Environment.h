@@ -3,6 +3,8 @@
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
 #include <memory>   // for unique_ptr
+#include "Environment.h"
+
 
 class Creature;
 class Plant;
@@ -10,7 +12,7 @@ class Plant;
 class Environment
 {
 public:
-    Environment(int width, int height);
+    Environment(Environment& environment, int width, int height);
 
     void update(float deltaTime);
     

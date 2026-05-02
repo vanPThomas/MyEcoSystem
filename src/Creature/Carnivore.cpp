@@ -1,7 +1,7 @@
 #include "Carnivore.h"
 
-Carnivore::Carnivore(float startX, float startY, int spaceWidth, int spaceHeight)
-    : Creature(startX, startY, spaceWidth, spaceHeight)
+Carnivore::Carnivore(Environment& environment, float startX, float startY)
+    : Creature(Environment& environment, startX, startY)
 {
     // Carnivore-specific DNA defaults
     brain.dna.speed = 70.0f;           // faster

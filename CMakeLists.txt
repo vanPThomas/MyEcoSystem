@@ -23,6 +23,8 @@ add_executable(MyEcoSystem
     src/Utils/MathUtils.cpp
     src/World/Plant.cpp
     src/World/Environment.cpp
+    src/Creature/Herbivore.cpp
+    src/Creature/Carnivore.cpp
     
     # ImGui core
     imgui/imgui.cpp

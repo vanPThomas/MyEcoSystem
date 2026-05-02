@@ -20,6 +20,15 @@ Environment::Environment(int width, int height)
     }
 }
 
+void Environment::update(float deltaTime)
+{
+    // Update all creatures with deltaTime
+    for (auto& creature : creatures)
+    {
+        creature->update(deltaTime);
+    }
+}
+
 void Environment::SpawnRandomCreature()
 {
     float randomX = static_cast<float>(rand() % simulationSpaceWidth);
@@ -39,11 +48,11 @@ void Environment::SpawnRandomPlant()
     plants.push_back(std::move(newPlant));
 }
 
-void Environment::update(float deltaTime)
+void Environment::SpawnRandomPlant()
 {
-    // Update all creatures with deltaTime
-    for (auto& creature : creatures)
-    {
-        creature->update(deltaTime);
-    }
+    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
+    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
+
+    auto newPlant = std::make_unique<Plant>(*this, randomX, randomY);
+    plants.push_back(std::move(newPlant));
 }

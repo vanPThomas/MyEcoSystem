@@ -1,10 +1,11 @@
 #pragma once
 #include "Creature.h"
+#include "Environment.h"
 
 class Carnivore : public Creature
 {
 public:
-    Carnivore(float startX, float startY, int spaceWidth, int spaceHeight);
+    Carnivore(Environment& environment, float startX, float startY);
 
     void update(float deltaTime) override;
 

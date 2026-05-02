@@ -4,7 +4,7 @@
 class Herbivore : public Creature
 {
 public:
-    Herbivore(float startX, float startY, int spaceWidth, int spaceHeight);
+    Herbivore(Environment& environment, float startX, float startY);
 
     void update(float deltaTime) override;
 
