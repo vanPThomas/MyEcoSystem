@@ -47,12 +47,3 @@ void Environment::SpawnRandomPlant()
     auto newPlant = std::make_unique<Plant>(*this, randomX, randomY);
     plants.push_back(std::move(newPlant));
 }
-
-void Environment::SpawnRandomPlant()
-{
-    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
-    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
-
-    auto newPlant = std::make_unique<Plant>(*this, randomX, randomY);
-    plants.push_back(std::move(newPlant));
-}

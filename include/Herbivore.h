@@ -1,5 +1,6 @@
 #pragma once
 #include "Creature.h"
+#include "Environment.h"
 
 class Herbivore : public Creature
 {

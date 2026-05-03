@@ -12,7 +12,7 @@ class Plant;
 class Environment
 {
 public:
-    Environment(Environment& environment, int width, int height);
+    Environment(int width, int height);
 
     void update(float deltaTime);
     

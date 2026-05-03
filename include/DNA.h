@@ -27,6 +27,20 @@ public:
     float getSexDrive() const {return sexdrive;}
     float getMutationRate() const {return mutationRate;}
     float getGestationTime() const {return gestationTime;}
+
+    // ====================== GETTERS ======================
+    void setSpeed(float value)           { speed = value; }
+    void setVisionRange(float value)     { visionRange = value; }
+    void setSize(float value)            { size = value; }
+    void setStrength(float value)        { strength = value; }
+
+    void setMetabolism(float value)      { metabolism = value; }
+
+    void setAggression(float value)      { aggression = value; }
+    void setGregariousness(float value)  { gregariousness = value; }
+    
+    void setMutationRate(float value)    { mutationRate = value; }
+
     
 private:
 
