@@ -1,6 +1,8 @@
 #include "Environment.h"
 #include "Creature.h"
 #include "Plant.h"
+#include "Carnivore.h"
+#include "Herbivore.h"
 
 Environment::Environment(int width, int height)
     : simulationSpaceWidth(width)
@@ -10,13 +12,21 @@ Environment::Environment(int width, int height)
     srand(static_cast<unsigned int>(time(nullptr)));
 
     // Spawn the creature at a random position inside the simulation area
-    for (int i = 0; i < 10; i++)
-    {
-        SpawnRandomCreature();
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     SpawnRandomCreature();
+    // }
     for (int i = 0; i < 20; i++)
     {
         SpawnRandomPlant();
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        SpawnRandomCarnivore();
+    }
+        for (int i = 0; i < 20; i++)
+    {
+        SpawnRandomHerbivore();
     }
 }
 
@@ -29,6 +39,7 @@ void Environment::update(float deltaTime)
     }
 }
 
+// ====================== Spawn wildlife ======================
 void Environment::SpawnRandomCreature()
 {
     float randomX = static_cast<float>(rand() % simulationSpaceWidth);
@@ -46,4 +57,24 @@ void Environment::SpawnRandomPlant()
 
     auto newPlant = std::make_unique<Plant>(*this, randomX, randomY);
     plants.push_back(std::move(newPlant));
+}
+
+void Environment::SpawnRandomHerbivore()
+{
+    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
+    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
+
+    // Create unique_ptr and pass Environment reference
+    auto newHerbivore = std::make_unique<Herbivore>(*this, randomX, randomY);
+    creatures.push_back(std::move(newHerbivore));
+}
+
+void Environment::SpawnRandomCarnivore()
+{
+    float randomX = static_cast<float>(rand() % simulationSpaceWidth);
+    float randomY = static_cast<float>(rand() % simulationSpaceHeight);
+
+    // Create unique_ptr and pass Environment reference
+    auto newHerbivore = std::make_unique<Carnivore>(*this, randomX, randomY);
+    creatures.push_back(std::move(newHerbivore));
 }

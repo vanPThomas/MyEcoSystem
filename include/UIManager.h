@@ -11,6 +11,8 @@
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
 #include <vector>
+#include "Herbivore.h"
+#include "Carnivore.h"
 
 class UIManager
 {

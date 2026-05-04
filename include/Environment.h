@@ -21,6 +21,8 @@ public:
 
     void SpawnRandomCreature();
     void SpawnRandomPlant();
+    void SpawnRandomCarnivore();
+    void SpawnRandomHerbivore();
 
     std::vector<std::unique_ptr<Creature>> creatures;
     std::vector<std::unique_ptr<Plant>> plants;

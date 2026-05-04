@@ -112,19 +112,36 @@ void UIManager::renderSimulationScreen()
 
     for (int i = 0; i < (int)environment.creatures.size(); ++i)
     {
-        const auto& c = *environment.creatures[i];
+        // const auto& c = *environment.creatures[i];
+        Creature* c = environment.creatures[i].get();
+        if (Herbivore* herb = dynamic_cast<Herbivore*>(c))
+        {
+            ImVec2 pos(origin.x + c->getXPos(), origin.y + c->getYPos());
+            float radius = c->brain.dna.getSize();
 
-        ImVec2 pos(origin.x + c.getXPos(), origin.y + c.getYPos());
-        float radius = c.brain.dna.getSize();
+            // Choose color based on whether it's selected
+            ImU32 color = (i == selectedCreatureIndex) 
+                ? IM_COL32(255, 255, 100, 255)   // yellow when selected
+                : IM_COL32(80, 200, 0, 255);   // normal green
 
-        // Choose color based on whether it's selected
-        ImU32 color = (i == selectedCreatureIndex) 
-            ? IM_COL32(255, 255, 100, 255)   // yellow when selected
-            : IM_COL32(80, 200, 255, 255);   // normal blue
+            drawList->AddCircleFilled(pos, radius, color);
 
-        drawList->AddCircleFilled(pos, radius, color);
+            drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+        }
+        if (Carnivore* carn = dynamic_cast<Carnivore*>(c))
+        {
+            ImVec2 pos(origin.x + c->getXPos(), origin.y + c->getYPos());
+            float radius = c->brain.dna.getSize();
 
-        drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+            // Choose color based on whether it's selected
+            ImU32 color = (i == selectedCreatureIndex) 
+                ? IM_COL32(255, 255, 100, 255)   // yellow when selected
+                : IM_COL32(255, 0, 0, 255);   // normal
+
+            drawList->AddCircleFilled(pos, radius, color);
+
+            drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+        }
     }
 
     for (int i = 0; i < (int)environment.plants.size(); ++i)
