@@ -234,6 +234,15 @@ void UIManager::renderDataInspector()
             ImGui::Text("Mating Drive:  %.2f", selected.brain.getMatingDrive());
             ImGui::Text("Anger:         %.2f", selected.brain.getAnger());
         }
+
+        ImGui::Separator();
+
+        // === Brain Section ===
+        if (ImGui::CollapsingHeader("Physical", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Text("Age:           %.2f", selected.getAge());
+            ImGui::Text("Energy:          %.2f", selected.getEnergy());
+        }
     }
 
     ImGui::End();

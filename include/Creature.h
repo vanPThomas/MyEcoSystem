@@ -14,6 +14,9 @@ public:
     float getXPos() const {return x;}
     float getYPos() const {return y;}
 
+    float getAge()  const {return age;}
+    float getEnergy() const {return energy;}
+
     Brain brain;
     
 protected:

@@ -55,7 +55,7 @@ void Creature::update(float deltaTime)
 
     // simple energy drain based on metabolism + movement
     float movementCost = (vx*vx + vy*vy) * 0.001f;
-    energy -= (brain.dna.getMetabolism() + movementCost) * deltaTime;
+    energy -= ((brain.dna.getMetabolism() + movementCost) * deltaTime)/100;
 
     // Clamp position and reset target if outside bounds
     if (x < creatureSize)
