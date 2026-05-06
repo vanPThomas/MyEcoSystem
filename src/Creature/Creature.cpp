@@ -18,6 +18,13 @@ Creature::Creature(Environment& environment, float startX, float startY)
 // Update creature information
 void Creature::update(float deltaTime)
 {
+    // Dead check
+    if (energy <= 0)
+    {
+        isAlive = false;
+        return;
+    }
+
     int creatureSize = brain.dna.getSize();
     // Age the creature
     age += deltaTime;
@@ -32,15 +39,30 @@ void Creature::update(float deltaTime)
 
     if (distance > 5.0f)   // only move if not already very close
     {
-        // Normalize direction and multiply by speed from DNA
-        float speed = brain.dna.getSpeed();
-
-        vx = (dx / distance) * speed;
-        vy = (dy / distance) * speed;
-
-        // Apply velocity
-        x += vx * deltaTime;
-        y += vy * deltaTime;
+        if (energy < 20)
+        {
+            // slower speed due to hunger
+            float speed = brain.dna.getSpeed()/3;
+    
+            vx = (dx / distance) * speed;
+            vy = (dy / distance) * speed;
+    
+            // Apply velocity
+            x += vx * deltaTime;
+            y += vy * deltaTime;
+        }
+        else
+        {
+            // Normalize direction and multiply by speed from DNA
+            float speed = brain.dna.getSpeed();
+    
+            vx = (dx / distance) * speed;
+            vy = (dy / distance) * speed;
+    
+            // Apply velocity
+            x += vx * deltaTime;
+            y += vy * deltaTime;
+        }
     }
     else
     {
@@ -54,8 +76,13 @@ void Creature::update(float deltaTime)
     }
 
     // simple energy drain based on metabolism + movement
-    float movementCost = (vx*vx + vy*vy) * 0.001f;
+    float movementCost = (vx*vx + vy*vy) * 0.1f;
     energy -= ((brain.dna.getMetabolism() + movementCost) * deltaTime)/100;
+
+    if (energy < 0)
+    {
+        energy = 0;
+    }
 
     // Clamp position and reset target if outside bounds
     if (x < creatureSize)

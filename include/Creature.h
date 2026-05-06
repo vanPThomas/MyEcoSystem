@@ -33,5 +33,7 @@ protected:
     float energy = 100.0f;
     float age    = 0.0f;
 
+    bool isAlive = true;
+
     Environment& environment;
 };
