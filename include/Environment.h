@@ -3,6 +3,7 @@
 #include <cstdlib>   // for rand()
 #include <ctime>     // for time()
 #include <memory>   // for unique_ptr
+#include <algorithm>
 #include "Environment.h"
 
 
@@ -26,6 +27,8 @@ public:
 
     std::vector<std::unique_ptr<Creature>> creatures;
     std::vector<std::unique_ptr<Plant>> plants;
+
+    std::vector<std::unique_ptr<Creature>> deadCreatures;
 
 private:
     int simulationSpaceWidth = 1000;

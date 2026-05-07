@@ -32,11 +32,23 @@ Environment::Environment(int width, int height)
 
 void Environment::update(float deltaTime)
 {
-    // Update all creatures with deltaTime
-    for (auto& creature : creatures)
+    std::vector<std::unique_ptr<Creature>> newlyDead;
+    
+    for (auto& c : creatures)
     {
-        creature->update(deltaTime);
+        // Update all creatures with deltaTime
+        c->update(deltaTime);
+
+        if (!c->getIsAlive())
+            newlyDead.push_back(std::move(c));
     }
+
+    // Remove all dead creaturs
+    creatures.erase(std::remove_if(creatures.begin(), creatures.end(), [](const auto& ptr){ return !ptr || !ptr->getIsAlive(); }), creatures.end());
+
+    // Move them to dead list
+    for (auto& d : newlyDead)
+        deadCreatures.push_back(std::move(d));
 }
 
 // ====================== Spawn wildlife ======================

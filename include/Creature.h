@@ -17,6 +17,8 @@ public:
     float getAge()  const {return age;}
     float getEnergy() const {return energy;}
 
+    bool getIsAlive() const {return isAlive;}
+
     Brain brain;
     
 protected:
