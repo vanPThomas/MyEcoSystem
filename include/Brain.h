@@ -28,6 +28,9 @@ public:
     float getLastSeenFoodTime() const {return lastSeenFoodTime;}
     float getLastSeenPredatorTime() const {return lastSeenPredatorTime;}
     State getCurrentState() const { return currentState; }
+
+    // ====================== SETTERS ======================
+    void setCurrentState(State newState) {currentState = newState;}
     
 private:
     // ==================== Current Emotional / Mental State ====================

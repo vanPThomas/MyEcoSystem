@@ -12,10 +12,6 @@ Environment::Environment(int width, int height)
     srand(static_cast<unsigned int>(time(nullptr)));
 
     // Spawn the creature at a random position inside the simulation area
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     SpawnRandomCreature();
-    // }
     for (int i = 0; i < 20; i++)
     {
         SpawnRandomPlant();

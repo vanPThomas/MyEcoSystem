@@ -24,6 +24,10 @@ void Creature::update(float deltaTime)
         isAlive = false;
         return;
     }
+    else if(energy <= 50)
+    {
+        brain.setCurrentState(Brain::State::SeekingFood);
+    }
 
     int creatureSize = brain.dna.getSize();
     // Age the creature
