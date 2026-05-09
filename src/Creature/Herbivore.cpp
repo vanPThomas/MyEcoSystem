@@ -14,10 +14,61 @@ void Herbivore::update(float deltaTime)
 {
     Creature::update(deltaTime);   // Call base movement / energy drain
 
-    // // Herbivore-specific behavior
-    // if (brain.getHunger() > 0.6f)
-    //     seekFood();
-    // else if (brain.getFear() > 0.7f)
-    //     fleeFromPredators();
-    // // else wander peacefully
+    if (brain.getHunger() > 0.4f)
+    {
+        if (targetPlant == nullptr || targetPlant->getHealthPoints())
+        {
+            findNearestPlant(world);
+        }
+
+        if (targetPlant)
+        {
+            moveTowardsTarget(deltaTime);
+        }
+    }
+}
+
+void Herbivore::findNearestPlant()
+{
+    targetPlant = nullptr;
+    float bestDistanceSq = brain.dna.visionRange * brain.dna.visionRange;
+
+    for (auto& plant : environment.plants)
+    {
+        if (plant.getHealthPoints() <=0) continue;
+
+        float dx = plant.getXPos() - x;
+        float dy = plant.getYPos() - y;
+        float distSq = dx*dx + dy*dy;
+
+        if (distSq < bestDistanceSq)
+        {
+            bestDistanceSq = distSq;
+            targetPlant = &plant;
+        }
+    }
+}
+
+void Herbivore::moveTowardsTarget(float deltaTime)
+{
+    if (!targetPlant) return;
+
+    float dx = targetPlant->getXPos() - x;
+    float dy = targetPlant->getYPos() - y;
+    float distance = std::sqrt(dx*dx + dy*dy);
+
+    if (distance < 1.0f)
+    {
+        // Eat the plant!
+        // energy += targetPlant->energyValue;
+        // targetPlant->eaten = true;
+        // targetPlant = nullptr;
+        // brain.setState(Brain::State::Wandering);
+        return;
+    }
+
+    // Move towards it
+    float speed = brain.dna.getSpeed() * deltaTime;
+    x += (dx / distance) * speed;
+    y += (dy / distance) * speed;
 }
