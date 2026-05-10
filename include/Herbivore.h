@@ -14,6 +14,6 @@ private:
     void findNearestPlant();
     void moveTowardsTarget(float deltaTime);
 
-    Plant targetPlant;
+    Plant* targetPlant = nullptr;
 
 };

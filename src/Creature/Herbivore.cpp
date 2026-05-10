@@ -18,7 +18,7 @@ void Herbivore::update(float deltaTime)
     {
         if (targetPlant == nullptr || targetPlant->getHealthPoints())
         {
-            findNearestPlant(world);
+            findNearestPlant();
         }
 
         if (targetPlant)
@@ -31,20 +31,21 @@ void Herbivore::update(float deltaTime)
 void Herbivore::findNearestPlant()
 {
     targetPlant = nullptr;
-    float bestDistanceSq = brain.dna.visionRange * brain.dna.visionRange;
+    float bestDistanceSq = brain.dna.getVisionRange() * brain.dna.getVisionRange();
 
-    for (auto& plant : environment.plants)
-    {
-        if (plant.getHealthPoints() <=0) continue;
+    for (auto& plantPtr : environment.plants)
+    {   
+        Plant* plant = plantPtr.get();
+        if (plant->getHealthPoints() <=0) continue;
 
-        float dx = plant.getXPos() - x;
-        float dy = plant.getYPos() - y;
+        float dx = plant->getXPos() - x;
+        float dy = plant->getYPos() - y;
         float distSq = dx*dx + dy*dy;
 
         if (distSq < bestDistanceSq)
         {
             bestDistanceSq = distSq;
-            targetPlant = &plant;
+            targetPlant = plant;
         }
     }
 }
