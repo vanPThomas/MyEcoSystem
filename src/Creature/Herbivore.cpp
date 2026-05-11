@@ -12,20 +12,23 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
 
 void Herbivore::update(float deltaTime)
 {
-    Creature::update(deltaTime);   // Call base movement / energy drain
-
-    if (brain.getHunger() > 0.4f)
+    
+    //if (brain.getHunger() > 0.4f)
+    if (brain.getCurrentState() == Brain::State::SeekingFood)
     {
         if (targetPlant == nullptr || targetPlant->getHealthPoints())
         {
             findNearestPlant();
         }
-
+        
         if (targetPlant)
         {
             moveTowardsTarget(deltaTime);
         }
+        return;
     }
+
+    Creature::update(deltaTime);   // Call base movement / energy drain
 }
 
 void Herbivore::findNearestPlant()
