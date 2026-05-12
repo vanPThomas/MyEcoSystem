@@ -16,11 +16,11 @@ Environment::Environment(int width, int height)
     {
         SpawnRandomPlant();
     }
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 5; i++)
     {
         SpawnRandomCarnivore();
     }
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
     {
         SpawnRandomHerbivore();
     }

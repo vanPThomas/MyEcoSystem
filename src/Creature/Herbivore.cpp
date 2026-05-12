@@ -1,4 +1,5 @@
 #include "Herbivore.h"
+#include <iostream>
 
 Herbivore::Herbivore(Environment& environment, float startX, float startY)
     : Creature(environment, startX, startY)
@@ -25,10 +26,13 @@ void Herbivore::update(float deltaTime)
         {
             moveTowardsTarget(deltaTime);
         }
-        return;
     }
 
-    Creature::update(deltaTime);   // Call base movement / energy drain
+    if(!targetPlant)
+    {
+        Creature::update(deltaTime);   // Call base movement / energy drain
+    }
+
 }
 
 void Herbivore::findNearestPlant()
