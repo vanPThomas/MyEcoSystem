@@ -29,14 +29,22 @@ void Creature::update(float deltaTime)
         brain.setCurrentState(Brain::State::SeekingFood);
     }
 
-    int creatureSize = brain.dna.getSize();
     // Age the creature
     age += deltaTime;
 
     // Update brain (hunger, fear, etc.)
     brain.update(deltaTime);
 
-    // === Simple movement towards target using DNA speed ===
+    moveCreature(deltaTime);
+
+    energyDrain(deltaTime);
+
+    clampCreature();
+}
+
+// === Simple movement towards target using DNA speed ===
+void Creature::moveCreature(float deltaTime)
+{
     float dx = tx - x;
     float dy = ty - y;
     float distance = std::sqrt(dx*dx + dy*dy);
@@ -78,8 +86,11 @@ void Creature::update(float deltaTime)
         vx *= 0.5f;
         vy *= 0.5f;
     }
+}
 
-    // simple energy drain based on metabolism + movement
+// simple energy drain based on metabolism + movement
+void Creature::energyDrain(float deltaTime)
+{
     float movementCost = (vx*vx + vy*vy) * 0.1f;
     energy -= ((brain.dna.getMetabolism() + movementCost) * deltaTime)/100;
 
@@ -87,8 +98,13 @@ void Creature::update(float deltaTime)
     {
         energy = 0;
     }
+}
 
-    // Clamp position and reset target if outside bounds
+// Clamp position and reset target if outside bounds
+void Creature::clampCreature()
+{
+    int creatureSize = brain.dna.getSize();
+
     if (x < creatureSize)
     {
         x = creatureSize;

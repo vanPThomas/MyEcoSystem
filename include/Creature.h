@@ -22,7 +22,10 @@ public:
     Brain brain;
     
 protected:
-    
+    void moveCreature(float deltaTime);
+    void energyDrain(float deltaTime);
+    void clampCreature();
+
     float x = 0.0f;
     float y = 0.0f;
 
