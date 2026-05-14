@@ -22,6 +22,7 @@ public:
     Brain brain;
     
 protected:
+    void setState();
     void moveCreature(float deltaTime);
     void energyDrain(float deltaTime);
     void clampCreature();

@@ -18,16 +18,7 @@ Creature::Creature(Environment& environment, float startX, float startY)
 // Update creature information
 void Creature::update(float deltaTime)
 {
-    // Dead check
-    if (energy <= 0)
-    {
-        isAlive = false;
-        return;
-    }
-    else if(energy <= 50)
-    {
-        brain.setCurrentState(Brain::State::SeekingFood);
-    }
+    setState();
 
     // Age the creature
     age += deltaTime;
@@ -42,7 +33,22 @@ void Creature::update(float deltaTime)
     clampCreature();
 }
 
-// === Simple movement towards target using DNA speed ===
+// Set state
+void Creature::setState()
+{
+    // Dead check
+    if (energy <= 0)
+    {
+        isAlive = false;
+        return;
+    }
+    else if(energy <= 50)
+    {
+        brain.setCurrentState(Brain::State::SeekingFood);
+    }
+}
+
+// Simple movement towards target using DNA speed
 void Creature::moveCreature(float deltaTime)
 {
     float dx = tx - x;
