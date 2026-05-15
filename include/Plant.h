@@ -13,6 +13,8 @@ public:
     float getXPos() const {return x;}
     float getYPos() const {return y;}
     float getSize() const {return size;}
+
+    bool eaten = false;
     
 private:
     float x = 0.0f;

@@ -147,7 +147,7 @@ void UIManager::renderSimulationScreen()
     for (int i = 0; i < (int)environment.plants.size(); ++i)
     {
         const auto& p = *environment.plants[i];
-
+        
         ImVec2 pos(origin.x + p.getXPos(), origin.y + p.getYPos());
         float radius = p.getSize();
 

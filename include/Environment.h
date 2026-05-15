@@ -29,6 +29,7 @@ public:
     std::vector<std::unique_ptr<Plant>> plants;
 
     std::vector<std::unique_ptr<Creature>> deadCreatures;
+    std::vector<std::unique_ptr<Plant>> deadPlants;
 
 private:
     int simulationSpaceWidth = 1000;

@@ -45,6 +45,23 @@ void Environment::update(float deltaTime)
     // Move them to dead list
     for (auto& d : newlyDead)
         deadCreatures.push_back(std::move(d));
+
+
+    std::vector<std::unique_ptr<Plant>> newlyDeadPlants;
+    
+    for (auto& p : plants)
+    {
+        if (p->eaten)
+            newlyDeadPlants.push_back(std::move(p));
+    }
+
+    // Remove all dead plants
+    plants.erase(std::remove_if(plants.begin(), plants.end(), [](const auto& ptr){ return !ptr || ptr->eaten; }), plants.end());
+
+    // Move them to dead list
+    for (auto& dp : newlyDeadPlants)
+        deadPlants.push_back(std::move(dp));
+
 }
 
 // ====================== Spawn wildlife ======================
