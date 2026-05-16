@@ -62,6 +62,12 @@ void Environment::update(float deltaTime)
     for (auto& dp : newlyDeadPlants)
         deadPlants.push_back(std::move(dp));
 
+    const float plantSpawnChancePerFrame = 0.003f;     // ~3% chance per frame → roughly 2 plants per second at 60 FPS
+
+    if (MathUtils::randomFloat(0.0f, 1.0f) < plantSpawnChancePerFrame)   // using your random helper
+    {
+        SpawnRandomPlant();
+    }
 }
 
 // ====================== Spawn wildlife ======================
