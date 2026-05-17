@@ -21,7 +21,6 @@ void Creature::update(float deltaTime)
     setState();
 
     // Age the creature
-    age += deltaTime;
 
     // Update brain (hunger, fear, etc.)
     brain.update(deltaTime);

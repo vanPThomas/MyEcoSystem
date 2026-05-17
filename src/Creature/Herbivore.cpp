@@ -13,7 +13,8 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
 
 void Herbivore::update(float deltaTime)
 {
-    
+    age += deltaTime;
+
     //if (brain.getHunger() > 0.4f)
     if (brain.getCurrentState() == Brain::State::SeekingFood)
     {

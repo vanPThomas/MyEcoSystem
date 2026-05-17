@@ -13,6 +13,8 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
 
 void Carnivore::update(float deltaTime)
 {
+    age += deltaTime;
+
     Creature::update(deltaTime);
 
     // if (brain.getHunger() > 0.5f)
