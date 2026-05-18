@@ -17,14 +17,30 @@ void Carnivore::update(float deltaTime)
 
     Creature::update(deltaTime);
 
-    // if (brain.getHunger() > 0.5f)
-    //     huntPrey();
-    // else
-    // {
-    //     // occasional wandering or resting
-    //     if (brain.getCurrentState() == Brain::State::Wandering)
-    //     {
-    //         // maybe pick random targets less often
-    //     }
-    // }
+}
+
+void Herbivore::findNearestHerbivore()
+{
+    targetHerbivore = nullptr;
+    float bestDistanceSq = brain.dna.getVisionRange() * brain.dna.getVisionRange();
+
+    for (auto& c : environment.creatures)
+    {   
+        if (Herbivore* herb = dynamic_cast<Herbivore*>(c))
+        {
+            Herbivore* herb = c.get();
+            if (herb->getHealthPoints() <=0) continue;
+    
+            float dx = herb->getXPos() - x;
+            float dy = herb->getYPos() - y;
+            float distSq = dx*dx + dy*dy;
+    
+            if (distSq < bestDistanceSq)
+            {
+                bestDistanceSq = distSq;
+                targetHerbivore = herb;
+            }
+        }
+
+    }
 }

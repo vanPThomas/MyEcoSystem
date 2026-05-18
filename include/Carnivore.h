@@ -10,6 +10,8 @@ public:
     void update(float deltaTime) override;
 
 private:
-    void huntPrey();
-    void chaseTarget();
+    Herbivore targetHerbivore = nullptr;
+
+    void findNearestHerbivore()
+
 };
