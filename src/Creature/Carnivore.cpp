@@ -15,8 +15,23 @@ void Carnivore::update(float deltaTime)
 {
     age += deltaTime;
 
-    Creature::update(deltaTime);
+        if (brain.getCurrentState() == Brain::State::SeekingFood)
+    {
+        if (targetHerbivore == nullptr || targetHerbivore->getHealth())
+        {
+            findNearestHerbivore();
+        }
+        
+        if (targetPlant)
+        {
+            // moveTowardsTarget(deltaTime);
+        }
+    }
 
+    if(!targetHerbivore)
+    {
+        Creature::update(deltaTime);
+    }
 }
 
 void Herbivore::findNearestHerbivore()
@@ -41,6 +56,5 @@ void Herbivore::findNearestHerbivore()
                 targetHerbivore = herb;
             }
         }
-
     }
 }
