@@ -13,5 +13,6 @@ private:
     Herbivore targetHerbivore = nullptr;
 
     void findNearestHerbivore()
+    void moveTowardsTarget(float deltaTime);
 
 };

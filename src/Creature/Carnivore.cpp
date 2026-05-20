@@ -44,7 +44,7 @@ void Herbivore::findNearestHerbivore()
         if (Herbivore* herb = dynamic_cast<Herbivore*>(c))
         {
             Herbivore* herb = c.get();
-            if (herb->getHealthPoints() <=0) continue;
+            if (herb->getHealth() <=0) continue;
     
             float dx = herb->getXPos() - x;
             float dy = herb->getYPos() - y;
@@ -57,4 +57,28 @@ void Herbivore::findNearestHerbivore()
             }
         }
     }
+}
+
+void Herbivore::moveTowardsTarget(float deltaTime)
+{
+    if (!targetHerbivore) return;
+
+    float dx = targetHerbivore->getXPos() - x;
+    float dy = targetHerbivore->getYPos() - y;
+    float distance = std::sqrt(dx*dx + dy*dy);
+
+    if (distance < 1.0f)
+    {
+        // Eat the plant!
+        energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
+        targetHerbivore->eaten = true;
+        targetHerbivore = nullptr;
+        brain.setCurrentState(Brain::State::Wandering);
+        return;
+    }
+
+    // Move towards it
+    float speed = brain.dna.getSpeed() * deltaTime;
+    x += (dx / distance) * speed;
+    y += (dy / distance) * speed;
 }
