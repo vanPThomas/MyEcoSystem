@@ -1,6 +1,7 @@
 #pragma once
 #include "Creature.h"
 #include "Environment.h"
+#include "Herbivore.h"
 
 class Carnivore : public Creature
 {
@@ -10,9 +11,9 @@ public:
     void update(float deltaTime) override;
 
 private:
-    Herbivore targetHerbivore = nullptr;
+    Herbivore* targetHerbivore = nullptr;
 
-    void findNearestHerbivore()
+    void findNearestHerbivore();
     void moveTowardsTarget(float deltaTime);
 
 };

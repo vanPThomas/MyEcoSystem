@@ -15,16 +15,16 @@ void Carnivore::update(float deltaTime)
 {
     age += deltaTime;
 
-        if (brain.getCurrentState() == Brain::State::SeekingFood)
+    if (brain.getCurrentState() == Brain::State::SeekingFood)
     {
         if (targetHerbivore == nullptr || targetHerbivore->getHealth())
         {
             findNearestHerbivore();
         }
         
-        if (targetPlant)
+        if (targetHerbivore)
         {
-            // moveTowardsTarget(deltaTime);
+            moveTowardsTarget(deltaTime);
         }
     }
 
@@ -34,7 +34,7 @@ void Carnivore::update(float deltaTime)
     }
 }
 
-void Herbivore::findNearestHerbivore()
+void Carnivore::findNearestHerbivore()
 {
     targetHerbivore = nullptr;
     float bestDistanceSq = brain.dna.getVisionRange() * brain.dna.getVisionRange();
@@ -59,7 +59,7 @@ void Herbivore::findNearestHerbivore()
     }
 }
 
-void Herbivore::moveTowardsTarget(float deltaTime)
+void Carnivore::moveTowardsTarget(float deltaTime)
 {
     if (!targetHerbivore) return;
 
@@ -69,11 +69,11 @@ void Herbivore::moveTowardsTarget(float deltaTime)
 
     if (distance < 1.0f)
     {
-        // Eat the plant!
-        energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
-        targetHerbivore->eaten = true;
-        targetHerbivore = nullptr;
-        brain.setCurrentState(Brain::State::Wandering);
+        // Eat the herbivore!
+        // energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
+        // targetHerbivore->eaten = true;
+        // targetHerbivore = nullptr;
+        // brain.setCurrentState(Brain::State::Wandering);
         return;
     }
 
