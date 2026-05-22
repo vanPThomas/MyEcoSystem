@@ -39,22 +39,24 @@ void Carnivore::findNearestHerbivore()
     targetHerbivore = nullptr;
     float bestDistanceSq = brain.dna.getVisionRange() * brain.dna.getVisionRange();
 
-    for (auto& c : environment.creatures)
+    for (auto& c : environment.creatures)   // c is std::unique_ptr<Creature>
     {   
-        if (Herbivore* herb = dynamic_cast<Herbivore*>(c))
+        Herbivore* herb = dynamic_cast<Herbivore*>(c.get());
+
+        if (herb == nullptr) 
+            continue;                               // Not a herbivore
+
+        if (herb->getHealth() <= 0) 
+            continue;                               // Skip dead ones
+
+        float dx = herb->getXPos() - x;
+        float dy = herb->getYPos() - y;
+        float distSq = dx*dx + dy*dy;
+
+        if (distSq < bestDistanceSq)
         {
-            Herbivore* herb = c.get();
-            if (herb->getHealth() <=0) continue;
-    
-            float dx = herb->getXPos() - x;
-            float dy = herb->getYPos() - y;
-            float distSq = dx*dx + dy*dy;
-    
-            if (distSq < bestDistanceSq)
-            {
-                bestDistanceSq = distSq;
-                targetHerbivore = herb;
-            }
+            bestDistanceSq = distSq;
+            targetHerbivore = herb;
         }
     }
 }
