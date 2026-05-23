@@ -15,7 +15,7 @@ Creature::Creature(Environment& environment, float startX, float startY)
     vy = MathUtils::randomFloat(-20.0f, 20.0f);
 }
 
-// Update creature information
+// ====================== Update Creature ======================
 void Creature::update(float deltaTime)
 {
     setState();
@@ -32,7 +32,7 @@ void Creature::update(float deltaTime)
     clampCreature();
 }
 
-// Set state
+// ====================== Set state ======================
 void Creature::setState()
 {
     // Dead check
@@ -47,7 +47,7 @@ void Creature::setState()
     }
 }
 
-// Simple movement towards target using DNA speed
+// ====================== Random Movement ======================
 void Creature::moveCreature(float deltaTime)
 {
     float dx = tx - x;

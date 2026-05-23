@@ -11,6 +11,7 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     brain.dna.setMetabolism(35.0f);     // lower metabolism
 }
 
+// ====================== Update Herbivore ======================
 void Herbivore::update(float deltaTime)
 {
     age += deltaTime;
@@ -36,6 +37,7 @@ void Herbivore::update(float deltaTime)
 
 }
 
+// ====================== Eat plant ======================
 void Herbivore::findNearestPlant()
 {
     targetPlant = nullptr;

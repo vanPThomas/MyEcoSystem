@@ -26,6 +26,7 @@ Environment::Environment(int width, int height)
     }
 }
 
+// ====================== Update Environment ======================
 void Environment::update(float deltaTime)
 {
     std::vector<std::unique_ptr<Creature>> newlyDead;

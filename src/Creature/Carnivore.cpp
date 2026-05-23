@@ -11,6 +11,7 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
     brain.dna.setVisionRange(220.0f);   // better vision for hunting
 }
 
+// ====================== Update Carnivore ======================
 void Carnivore::update(float deltaTime)
 {
     age += deltaTime;
@@ -34,6 +35,7 @@ void Carnivore::update(float deltaTime)
     }
 }
 
+// ====================== Hunt Herbivore ======================
 void Carnivore::findNearestHerbivore()
 {
     targetHerbivore = nullptr;
