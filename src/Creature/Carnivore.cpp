@@ -74,10 +74,10 @@ void Carnivore::moveTowardsTarget(float deltaTime)
     if (distance < 1.0f)
     {
         // Eat the herbivore!
-        // energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
-        // targetHerbivore->eaten = true;
-        // targetHerbivore = nullptr;
-        // brain.setCurrentState(Brain::State::Wandering);
+        energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
+        targetHerbivore->eaten = true;
+        targetHerbivore = nullptr;
+        brain.setCurrentState(Brain::State::Wandering);
         return;
     }
 
