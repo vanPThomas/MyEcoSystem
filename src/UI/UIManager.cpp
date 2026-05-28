@@ -146,19 +146,24 @@ void UIManager::renderSimulationScreen()
 
     for (int i = 0; i < (int)environment.deadCreatures.size(); ++i)
     {
-        const auto& dc = *environment.deadCreatures[i];
+        Creature* dc = environment.deadCreatures[i].get();   // get raw pointer from unique_ptr
+        Herbivore* herb = dynamic_cast<Herbivore*>(dc);
         
-        ImVec2 pos(origin.x + dc.getXPos(), origin.y + dc.getYPos());
-        float radius = dc.brain.dna.getSize();
-
-        // Choose color based on whether it's selected
-        ImU32 color = (i == selectedCreatureIndex) 
-            ? IM_COL32(255, 255, 100, 255)  // yellow when selected
-            : IM_COL32(0, 0, 0, 255);    // normal purple
-
-        drawList->AddCircleFilled(pos, radius, color);
-
-        drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+        if (herb == nullptr)
+            continue;   // not a herbivore
+        if (!herb->getEaten())
+        {
+            ImVec2 pos(origin.x + herb->getXPos(), origin.y + herb->getYPos());
+            float radius = herb->brain.dna.getSize();
+    
+            // Choose color based on whether it's selected
+            ImU32 color = (i == selectedCreatureIndex) 
+                ? IM_COL32(255, 255, 100, 255)  // yellow when selected
+                : IM_COL32(0, 0, 0, 255);    // normal black
+    
+            drawList->AddCircleFilled(pos, radius, color);
+            drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
+        }
     }
 
     for (int i = 0; i < (int)environment.plants.size(); ++i)

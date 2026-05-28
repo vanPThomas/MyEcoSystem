@@ -62,11 +62,12 @@ void Carnivore::findNearestHerbivore()
             targetHerbivore = herb;
         }
     }
-    // Find a living herbivore to hunt
+    // Check if a herbivore corpse was found to eat.
     if ( targetHerbivore != nullptr)
     {
         return;
     }
+    // Find a living herbivore to hunt
     for (auto& c : environment.creatures)   // c is std::unique_ptr<Creature>
     {   
         Herbivore* herb = dynamic_cast<Herbivore*>(c.get());
@@ -101,7 +102,7 @@ void Carnivore::moveTowardsTarget(float deltaTime)
     {
         // Eat the herbivore!
         energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
-        targetHerbivore->eaten = true;
+        targetHerbivore->setEaten(true);
         targetHerbivore = nullptr;
         brain.setCurrentState(Brain::State::Wandering);
         return;

@@ -11,14 +11,17 @@ public:
     void update(float deltaTime) override;
 
     float getEnergyPerHealthPoint() const {return energyPerHealthPoint;}
+    bool getEaten() const {return eaten;}
 
-    bool eaten = false;
+    void setEaten(bool isEaten) {eaten = isEaten;}
 
-private:
+    
+    private:
     void findNearestPlant();
     void moveTowardsTarget(float deltaTime);
-
+    
     float energyPerHealthPoint = 0.5f;
+    bool eaten = false;
 
     Plant* targetPlant = nullptr;
 
