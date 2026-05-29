@@ -54,7 +54,8 @@ void Creature::moveCreature(float deltaTime)
     float dy = ty - y;
     float distance = std::sqrt(dx*dx + dy*dy);
 
-    if (distance > 5.0f)   // only move if not already very close
+    // only move if not already very close
+    if (distance > 5.0f)
     {
         if (energy < 20)
         {

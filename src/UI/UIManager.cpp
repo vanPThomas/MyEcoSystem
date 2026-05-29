@@ -112,7 +112,7 @@ void UIManager::renderSimulationScreen()
 
     for (int i = 0; i < (int)environment.creatures.size(); ++i)
     {
-        // const auto& c = *environment.creatures[i];
+        // Draw Herbivores
         Creature* c = environment.creatures[i].get();
         if (Herbivore* herb = dynamic_cast<Herbivore*>(c))
         {
@@ -128,6 +128,7 @@ void UIManager::renderSimulationScreen()
 
             drawList->AddCircle(pos, radius + 2.0f, IM_COL32(255, 255, 255, 80));
         }
+        // Draw Carnivores
         if (Carnivore* carn = dynamic_cast<Carnivore*>(c))
         {
             ImVec2 pos(origin.x + c->getXPos(), origin.y + c->getYPos());
@@ -144,6 +145,7 @@ void UIManager::renderSimulationScreen()
         }
     }
 
+    //Draw dead creature
     for (int i = 0; i < (int)environment.deadCreatures.size(); ++i)
     {
         Creature* dc = environment.deadCreatures[i].get();   // get raw pointer from unique_ptr
@@ -166,6 +168,7 @@ void UIManager::renderSimulationScreen()
         }
     }
 
+    // Draw Plants
     for (int i = 0; i < (int)environment.plants.size(); ++i)
     {
         const auto& p = *environment.plants[i];

@@ -16,7 +16,6 @@ void Herbivore::update(float deltaTime)
 {
     age += deltaTime;
 
-    //if (brain.getHunger() > 0.4f)
     if (brain.getCurrentState() == Brain::State::SeekingFood)
     {
         if (targetPlant == nullptr || targetPlant->getHealthPoints())
@@ -38,6 +37,7 @@ void Herbivore::update(float deltaTime)
 }
 
 // ====================== Eat plant ======================
+// Find nearest plant
 void Herbivore::findNearestPlant()
 {
     targetPlant = nullptr;
@@ -60,6 +60,7 @@ void Herbivore::findNearestPlant()
     }
 }
 
+// Move to target and eat it
 void Herbivore::moveTowardsTarget(float deltaTime)
 {
     if (!targetPlant) return;

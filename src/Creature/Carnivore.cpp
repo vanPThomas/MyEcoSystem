@@ -36,6 +36,7 @@ void Carnivore::update(float deltaTime)
 }
 
 // ====================== Hunt Herbivore ======================
+// Find closest target, either dead or alive
 void Carnivore::findNearestHerbivore()
 {
     targetHerbivore = nullptr;
@@ -90,6 +91,7 @@ void Carnivore::findNearestHerbivore()
     }
 }
 
+// Move to to target and eat it
 void Carnivore::moveTowardsTarget(float deltaTime)
 {
     if (!targetHerbivore) return;
