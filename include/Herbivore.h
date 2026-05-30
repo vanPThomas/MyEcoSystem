@@ -16,9 +16,10 @@ public:
     void setEaten(bool isEaten) {eaten = isEaten;}
 
     
-    private:
+private:
     void findNearestPlant();
     void moveTowardsTarget(float deltaTime);
+    void eatTarget();
     
     float energyPerHealthPoint = 0.5f;
     bool eaten = false;

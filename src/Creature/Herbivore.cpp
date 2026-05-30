@@ -71,11 +71,7 @@ void Herbivore::moveTowardsTarget(float deltaTime)
 
     if (distance < 1.0f)
     {
-        // Eat the plant!
-        energy += targetPlant->getHealthPoints() * targetPlant->getEnergyPerHealthPoint();
-        targetPlant->eaten = true;
-        targetPlant = nullptr;
-        brain.setCurrentState(Brain::State::Wandering);
+        eatTarget();
         return;
     }
 
@@ -83,4 +79,13 @@ void Herbivore::moveTowardsTarget(float deltaTime)
     float speed = brain.dna.getSpeed() * deltaTime;
     x += (dx / distance) * speed;
     y += (dy / distance) * speed;
+}
+
+void Herbivore::eatTarget()
+{
+    // Eat the plant!
+    energy += targetPlant->getHealthPoints() * targetPlant->getEnergyPerHealthPoint();
+    targetPlant->eaten = true;
+    targetPlant = nullptr;
+    brain.setCurrentState(Brain::State::Wandering);
 }

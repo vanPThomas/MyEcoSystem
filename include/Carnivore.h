@@ -15,5 +15,6 @@ private:
 
     void findNearestHerbivore();
     void moveTowardsTarget(float deltaTime);
+    void eatTarget();
 
 };
