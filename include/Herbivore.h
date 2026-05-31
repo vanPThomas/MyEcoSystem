@@ -10,9 +10,11 @@ public:
 
     void update(float deltaTime) override;
 
+    // ====================== GETTERS ======================
     float getEnergyPerHealthPoint() const {return energyPerHealthPoint;}
     bool getEaten() const {return eaten;}
 
+    // ====================== SETTERS ======================
     void setEaten(bool isEaten) {eaten = isEaten;}
 
     

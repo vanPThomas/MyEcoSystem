@@ -112,6 +112,7 @@ void Carnivore::moveTowardsTarget(float deltaTime)
     y += (dy / distance) * speed;
 }
 
+// Eat the target herbivore
 void Carnivore::eatTarget()
 {
     // Eat the herbivore!

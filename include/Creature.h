@@ -11,6 +11,7 @@ public:
     virtual ~Creature() = default;
     virtual void update(float deltaTime);   // Main update function
     
+    // ====================== GETTERS ======================
     float getXPos() const {return x;}
     float getYPos() const {return y;}
 
@@ -20,7 +21,6 @@ public:
 
     bool getIsAlive() const {return isAlive;}
 
-
     Brain brain;
     
 protected:
@@ -29,6 +29,7 @@ protected:
     void energyDrain(float deltaTime);
     void clampCreature();
 
+    // Movement and location data
     float x = 0.0f;
     float y = 0.0f;
 
@@ -38,6 +39,7 @@ protected:
     float tx = 0.0f;   // current target x
     float ty = 0.0f;   // current target y
     
+    // General stats
     float energy = 100.0f;
     float age    = 0.0f;
     float health = 100.0f;

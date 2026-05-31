@@ -17,14 +17,17 @@ public:
 
     void update(float deltaTime);
     
+    // ====================== GETTERS ======================
     float getSimulationSpaceWidth() const {return simulationSpaceWidth;}
     float getSimulationSpaceHeight() const {return simulationSpaceHeight;}
 
+    // Spawners
     void SpawnRandomCreature();
     void SpawnRandomPlant();
     void SpawnRandomCarnivore();
     void SpawnRandomHerbivore();
 
+    // Wildlife lists
     std::vector<std::unique_ptr<Creature>> creatures;
     std::vector<std::unique_ptr<Plant>> plants;
 
