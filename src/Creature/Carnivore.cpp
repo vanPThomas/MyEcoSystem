@@ -102,8 +102,18 @@ void Carnivore::moveTowardsTarget(float deltaTime)
 
     if (distance < 1.0f)
     {
-        eatTarget()
-        return;
+        if (targetHerbivore->getHealth()<= 0)
+        {
+            eatTarget();
+            return;
+        }
+        else
+        {
+            float targethealth = targetHerbivore->getHealth();
+            targethealth -= brain.dna.getStrength() * deltaTime;
+            targetHerbivore->setHealth(targethealth);
+            return;
+        }
     }
 
     // Move towards it

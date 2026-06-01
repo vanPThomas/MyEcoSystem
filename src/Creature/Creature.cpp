@@ -20,8 +20,6 @@ void Creature::update(float deltaTime)
 {
     setState();
 
-    // Age the creature
-
     // Update brain (hunger, fear, etc.)
     brain.update(deltaTime);
 
@@ -36,7 +34,7 @@ void Creature::update(float deltaTime)
 void Creature::setState()
 {
     // Dead check
-    if (energy <= 0)
+    if (energy <= 0 || health <= 0)
     {
         isAlive = false;
         return;

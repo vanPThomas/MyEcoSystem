@@ -21,6 +21,9 @@ public:
 
     bool getIsAlive() const {return isAlive;}
 
+    // ====================== SETTERS ======================
+    void setHealth(float newHealth) {health = newHealth;}
+
     Brain brain;
     
 protected:

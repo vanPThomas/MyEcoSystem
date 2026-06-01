@@ -28,7 +28,7 @@ public:
     float getMutationRate() const {return mutationRate;}
     float getGestationTime() const {return gestationTime;}
 
-    // ====================== GETTERS ======================
+    // ====================== SETTERS ======================
     void setSpeed(float value)           { speed = value; }
     void setVisionRange(float value)     { visionRange = value; }
     void setSize(float value)            { size = value; }
