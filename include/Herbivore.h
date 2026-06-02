@@ -12,6 +12,7 @@ public:
 
     // ====================== GETTERS ======================
     float getEnergyPerHealthPoint() const {return energyPerHealthPoint;}
+    float getOriginalHealthPoints() const {return originalHealthPoints;}
     bool getEaten() const {return eaten;}
 
     // ====================== SETTERS ======================
@@ -24,6 +25,7 @@ private:
     void eatTarget();
     
     float energyPerHealthPoint = 0.5f;
+    float originalHealthPoints = 100.0f;
     bool eaten = false;
 
     Plant* targetPlant = nullptr;

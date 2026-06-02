@@ -18,7 +18,7 @@ void Carnivore::update(float deltaTime)
 
     if (brain.getCurrentState() == Brain::State::SeekingFood)
     {
-        if (targetHerbivore == nullptr || targetHerbivore->getHealth())
+        if (targetHerbivore == nullptr)
         {
             findNearestHerbivore();
         }
@@ -104,7 +104,9 @@ void Carnivore::moveTowardsTarget(float deltaTime)
     {
         if (targetHerbivore->getHealth()<= 0)
         {
+            std::cout << "!!!\n";
             eatTarget();
+            std::cout << "aaa\n";
             return;
         }
         else
@@ -126,7 +128,7 @@ void Carnivore::moveTowardsTarget(float deltaTime)
 void Carnivore::eatTarget()
 {
     // Eat the herbivore!
-    energy += targetHerbivore->getHealth() * targetHerbivore->getEnergyPerHealthPoint();
+    energy += targetHerbivore->getOriginalHealthPoints() * targetHerbivore->getEnergyPerHealthPoint();
     targetHerbivore->setEaten(true);
     targetHerbivore = nullptr;
     brain.setCurrentState(Brain::State::Wandering);

@@ -2,6 +2,7 @@
 #include "Creature.h"
 #include "Environment.h"
 #include "Herbivore.h"
+#include <iostream>
 
 class Carnivore : public Creature
 {
