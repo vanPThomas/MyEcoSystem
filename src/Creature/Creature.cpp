@@ -107,27 +107,31 @@ void Creature::energyDrain(float deltaTime)
 // Clamp position and reset target if outside bounds
 void Creature::clampCreature()
 {
-    int creatureSize = brain.dna.getSize();
+    float size = brain.dna.getSize();
+    float maxX = environment.getSimulationSpaceWidth();
+    float maxY = environment.getSimulationSpaceHeight();
 
-    if (x < creatureSize)
+    // Clamp X
+    if (x < size)
     {
-        x = creatureSize;
-        tx = creatureSize;
+        x = size;
+        tx = size;
     }
-    else if (x > environment.getSimulationSpaceWidth() - creatureSize)
+    else if (x > maxX - size)
     {
-        x = environment.getSimulationSpaceWidth() - creatureSize;
-        tx = environment.getSimulationSpaceWidth() - creatureSize;
+        x = maxX - size;
+        tx = maxX - size;
     }
 
-    if (y < creatureSize)
+    // Clamp Y
+    if (y < size)
     {
-        y = creatureSize;
-        ty = creatureSize;
+        y = size;
+        ty = size;
     }
-    else if (y > environment.getSimulationSpaceHeight() - creatureSize)
+    else if (y > maxY - size)
     {
-        y = environment.getSimulationSpaceHeight() - creatureSize;
-        ty = environment.getSimulationSpaceHeight() - creatureSize;
+        y = maxY - size;
+        ty = maxY - size;
     }
 }

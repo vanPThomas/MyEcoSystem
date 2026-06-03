@@ -2,6 +2,8 @@
 #include "Brain.h"
 #include "MathUtils.h"
 #include "Environment.h"
+#include <iostream>
+#include <algorithm>
 
 class Creature
 {

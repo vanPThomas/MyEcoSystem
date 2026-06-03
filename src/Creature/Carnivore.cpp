@@ -104,9 +104,7 @@ void Carnivore::moveTowardsTarget(float deltaTime)
     {
         if (targetHerbivore->getHealth()<= 0)
         {
-            std::cout << "!!!\n";
             eatTarget();
-            std::cout << "aaa\n";
             return;
         }
         else
