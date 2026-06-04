@@ -92,6 +92,7 @@ void Creature::moveCreature(float deltaTime)
     }
 }
 
+// ====================== Draining Energy ======================
 // simple energy drain based on metabolism + movement
 void Creature::energyDrain(float deltaTime)
 {
@@ -104,6 +105,7 @@ void Creature::energyDrain(float deltaTime)
     }
 }
 
+// ====================== Clamping ======================
 // Clamp position and reset target if outside bounds
 void Creature::clampCreature()
 {
