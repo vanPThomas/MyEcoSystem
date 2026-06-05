@@ -20,6 +20,7 @@ public:
     float getAge()  const {return age;}
     float getEnergy() const {return energy;}
     float getHealth() const {return health;}
+    float getMaxHealth() const {return maxHealth;}
 
     bool getIsAlive() const {return isAlive;}
 

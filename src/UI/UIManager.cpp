@@ -265,8 +265,10 @@ void UIManager::renderDataInspector()
         // === Brain Section ===
         if (ImGui::CollapsingHeader("Physical", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            ImGui::Text("Age:           %.2f", selected.getAge());
+            ImGui::Text("Age:             %.2f", selected.getAge());
             ImGui::Text("Energy:          %.2f", selected.getEnergy());
+            ImGui::Text("Health:          %.2f", selected.getHealth());
+            ImGui::Text("Max Health:      %.2f", selected.getMaxHealth());
         }
     }
 
