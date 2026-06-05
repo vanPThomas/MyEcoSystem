@@ -16,7 +16,7 @@ void Carnivore::update(float deltaTime)
 {
     age += deltaTime;
 
-    if (brain.getCurrentState() == Brain::State::SeekingFood)
+    if (brain.getCurrentState() == Brain::State::SeekingFood || brain.getCurrentState() == Brain::State::Hunting)
     {
         if (targetHerbivore == nullptr)
         {
@@ -94,6 +94,7 @@ void Carnivore::findNearestHerbivore()
 // Move to to target and eat it
 void Carnivore::moveTowardsTarget(float deltaTime)
 {
+    brain.setCurrentState(Brain::State::Hunting);
     if (!targetHerbivore) return;
 
     float dx = targetHerbivore->getXPos() - x;
