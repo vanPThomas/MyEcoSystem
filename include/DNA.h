@@ -33,6 +33,7 @@ public:
     void setVisionRange(float value)     { visionRange = value; }
     void setSize(float value)            { size = value; }
     void setStrength(float value)        { strength = value; }
+    void setIsMale(bool value)           { isMale = value; }
 
     void setMetabolism(float value)      { metabolism = value; }
 

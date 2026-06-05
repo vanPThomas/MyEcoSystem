@@ -13,6 +13,13 @@ Creature::Creature(Environment& environment, float startX, float startY)
     // Give it a small random initial velocity
     vx = MathUtils::randomFloat(-20.0f, 20.0f);
     vy = MathUtils::randomFloat(-20.0f, 20.0f);
+
+    // Decide gender
+    int genderInt = MathUtils::randomInt(0, 1);
+    if (genderInt == 1)
+        brain.dna.setIsMale(true);
+    else
+        brain.dna.setIsMale(false);
 }
 
 // ====================== Update Creature ======================
