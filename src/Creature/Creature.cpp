@@ -35,7 +35,12 @@ Creature::Creature(Environment& environment, float startX, float startY)
         health = MathUtils::randomFloat(160.0f, 250.0f); //0.5% for Extremely strong extremely healthy
 
     maxHealth = health;
-    std::cout << health << "\n";
+
+    // Health debugger
+    if (health > 130.0f)
+        std::cout << health << "\n";
+    if (health < 70.0f)
+        std::cout << health << "\n";
 }
 
 // ====================== Update Creature ======================
