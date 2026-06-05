@@ -15,11 +15,27 @@ Creature::Creature(Environment& environment, float startX, float startY)
     vy = MathUtils::randomFloat(-20.0f, 20.0f);
 
     // Decide gender
-    int genderInt = MathUtils::randomInt(0, 1);
-    if (genderInt == 1)
-        brain.dna.setIsMale(true);
+    brain.dna.setIsMale(MathUtils::randomInt(0, 1) == 1);
+
+    // give creature random health
+    float extremeWeirdIndex = MathUtils::randomFloat(-100.0f, 100.0f);
+    if (extremeWeirdIndex < -99.0f)
+        health = MathUtils::randomFloat(0.0f, 40.0f); //Extremely weak
+    else if (extremeWeirdIndex < -90.0f)
+        health = MathUtils::randomFloat(40.0f, 70.0f);
+    else if (extremeWeirdIndex < -60.0f)
+        health = MathUtils::randomFloat(70.0f, 90.0f);
+    else if (extremeWeirdIndex < 60.0f)
+        health = MathUtils::randomFloat(90.0f, 110.0f); // Normal and common creature health
+    else if (extremeWeirdIndex < 90.0f)
+        health = MathUtils::randomFloat(110.0f, 130.0f);
+    else if (extremeWeirdIndex < 99.0f)
+        health = MathUtils::randomFloat(130.0f, 160.0f);
     else
-        brain.dna.setIsMale(false);
+        health = MathUtils::randomFloat(160.0f, 250.0f); //Extremely healthy
+
+    maxHealth = health;
+    std::cout << health << "\n";
 }
 
 // ====================== Update Creature ======================

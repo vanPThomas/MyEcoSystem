@@ -48,6 +48,7 @@ protected:
     float energy = 100.0f;
     float age    = 0.0f;
     float health = 100.0f;
+    float maxHealth = 100.0f;
 
     bool isAlive = true;
 
