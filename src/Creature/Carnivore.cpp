@@ -6,9 +6,34 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
     // Carnivore-specific DNA defaults
     brain.dna.setSpeed(70.0f);          // faster
     brain.dna.setAggression(0.85f);     // much more aggressive
-    brain.dna.setStrength(800.0f);
     brain.dna.setMetabolism(65.0f);     // higher metabolism (needs more food) 
     brain.dna.setVisionRange(220.0f);   // better vision for hunting
+
+    // give Carnivore random strength
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float CarnStrength = 0.0f;
+    if (extremeWeirdIndex < 0.5f)
+        CarnStrength = MathUtils::randomFloat(0.0f, 400.0f); // 0.5% chance for extremely weak strength
+    else if (extremeWeirdIndex < 5.0f)
+        CarnStrength = MathUtils::randomFloat(400.0f, 600.0f); // 4.5% chance for weak strength
+    else if (extremeWeirdIndex < 20.0f)
+        CarnStrength = MathUtils::randomFloat(600.0f, 700.0f); // 15% chance for below average strength
+    else if (extremeWeirdIndex < 80.0f)
+        CarnStrength = MathUtils::randomFloat(700.0f, 900.0f); // 60% chance for Normal and common creature strength
+    else if (extremeWeirdIndex < 95.0f)
+        CarnStrength = MathUtils::randomFloat(900.0f, 1000.0f); // 15% chance for above average strength
+    else if (extremeWeirdIndex < 99.5f)
+        CarnStrength = MathUtils::randomFloat(1000.0f, 1200.0f); // 4.5% chance for high strength
+    else
+        CarnStrength = MathUtils::randomFloat(1200.0f, 2000.0f); //0.5% for Extremely high strength
+
+    // Strength debugger
+    if (CarnStrength > 1200.0f)
+        std::cout << "Abnormally High Strength (carn): " + std::to_string(CarnStrength) << "\n";
+    if (CarnStrength < 600.0f)
+        std::cout << "Abnormally Low Strength (carn): " + std::to_string(CarnStrength) << "\n";
+
+    brain.dna.setStrength(CarnStrength);
 }
 
 // ====================== Update Carnivore ======================

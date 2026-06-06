@@ -9,6 +9,32 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     brain.dna.setAggression(0.2f);
     brain.dna.setGregariousness(0.8f);  // herbivores like to stay in groups
     brain.dna.setMetabolism(35.0f);     // lower metabolism
+
+    // give herbivore random strength
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float herbStrength = 0.0f;
+    if (extremeWeirdIndex < 0.5f)
+        herbStrength = MathUtils::randomFloat(0.0f, 200.0f); // 0.5% chance for extremely weak strength
+    else if (extremeWeirdIndex < 5.0f)
+        herbStrength = MathUtils::randomFloat(200.0f, 300.0f); // 4.5% chance for weak strength
+    else if (extremeWeirdIndex < 20.0f)
+        herbStrength = MathUtils::randomFloat(300.0f, 350.0f); // 15% chance for below average strength
+    else if (extremeWeirdIndex < 80.0f)
+        herbStrength = MathUtils::randomFloat(350.0f, 450.0f); // 60% chance for Normal and common creature strength
+    else if (extremeWeirdIndex < 95.0f)
+        herbStrength = MathUtils::randomFloat(450.0f, 500.0f); // 15% chance for above average strength
+    else if (extremeWeirdIndex < 99.5f)
+        herbStrength = MathUtils::randomFloat(500.0f, 700.0f); // 4.5% chance for high strength
+    else
+        herbStrength = MathUtils::randomFloat(700.0f, 1500.0f); //0.5% for Extremely high strength
+
+    // Strength debugger
+    if (herbStrength > 500.0f)
+        std::cout << "Abnormally High Strength (herb): " + std::to_string(herbStrength) << "\n";
+    if (herbStrength < 300.0f)
+        std::cout << "Abnormally Low Strength (herb): " + std::to_string(herbStrength) << "\n";
+
+    brain.dna.setStrength(herbStrength);
 }
 
 // ====================== Update Herbivore ======================
