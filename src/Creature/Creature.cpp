@@ -38,9 +38,9 @@ Creature::Creature(Environment& environment, float startX, float startY)
 
     // Health debugger
     if (health > 130.0f)
-        std::cout << health << "\n";
+        std::cout << "Abnormally High Health: " + std::to_string(health) << "\n";
     if (health < 70.0f)
-        std::cout << health << "\n";
+        std::cout << "Abnormally Low Health: " + std::to_string(health) << "\n";
 }
 
 // ====================== Update Creature ======================
