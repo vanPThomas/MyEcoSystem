@@ -4,7 +4,6 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
     : Creature(environment, startX, startY)
 {
     // Carnivore-specific DNA defaults
-    brain.dna.setSpeed(70.0f);          // faster
     brain.dna.setAggression(0.85f);     // much more aggressive
     brain.dna.setMetabolism(65.0f);     // higher metabolism (needs more food) 
     brain.dna.setVisionRange(220.0f);   // better vision for hunting
@@ -34,6 +33,33 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
         std::cout << "Abnormally Low Strength (carn): " + std::to_string(CarnStrength) << "\n";
 
     brain.dna.setStrength(CarnStrength);
+
+    // give Carnivore random speed
+    extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float CarnSpeed = 0.0f;
+    if (extremeWeirdIndex < 0.5f)
+        CarnSpeed = MathUtils::randomFloat(0.0f, 40.0f); // 0.5% chance for extremely slow speed
+    else if (extremeWeirdIndex < 5.0f)
+        CarnSpeed = MathUtils::randomFloat(40.0f, 50.0f); // 4.5% chance for slow speed
+    else if (extremeWeirdIndex < 20.0f)
+        CarnSpeed = MathUtils::randomFloat(50.0f, 60.0f); // 15% chance for below average speed
+    else if (extremeWeirdIndex < 80.0f)
+        CarnSpeed = MathUtils::randomFloat(60.0f, 80.0f); // 60% chance for Normal and common creature speed
+    else if (extremeWeirdIndex < 95.0f)
+        CarnSpeed = MathUtils::randomFloat(80.0f, 90.0f); // 15% chance for above average speed
+    else if (extremeWeirdIndex < 99.5f)
+        CarnSpeed = MathUtils::randomFloat(90.0f, 110.0f); // 4.5% chance for high speed
+    else
+        CarnSpeed = MathUtils::randomFloat(110.0f, 150.0f); //0.5% for Extremely high speed
+
+    // Speed debugger
+    if (CarnSpeed > 90.0f)
+        std::cout << "Abnormally High Speed (carn): " + std::to_string(CarnSpeed) << "\n";
+    if (CarnSpeed < 50.0f)
+        std::cout << "Abnormally Low Speed (carn): " + std::to_string(CarnSpeed) << "\n";
+
+    brain.dna.setSpeed(CarnSpeed);
+
 }
 
 // ====================== Update Carnivore ======================

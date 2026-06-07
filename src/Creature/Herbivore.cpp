@@ -5,7 +5,6 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     : Creature(environment, startX, startY)
 {
     // Herbivore-specific default DNA adjustments
-    brain.dna.setSpeed(45.0f);
     brain.dna.setAggression(0.2f);
     brain.dna.setGregariousness(0.8f);  // herbivores like to stay in groups
     brain.dna.setMetabolism(35.0f);     // lower metabolism
@@ -35,6 +34,32 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
         std::cout << "Abnormally Low Strength (herb): " + std::to_string(herbStrength) << "\n";
 
     brain.dna.setStrength(herbStrength);
+
+    // give herbivore random speed
+    extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float herbSpeed = 0.0f;
+    if (extremeWeirdIndex < 0.5f)
+        herbSpeed = MathUtils::randomFloat(0.0f, 30.0f); // 0.5% chance for extremely slow speed
+    else if (extremeWeirdIndex < 5.0f)
+        herbSpeed = MathUtils::randomFloat(30.0f, 35.0f); // 4.5% chance for slow speed
+    else if (extremeWeirdIndex < 20.0f)
+        herbSpeed = MathUtils::randomFloat(35.0f, 40.0f); // 15% chance for below average speed
+    else if (extremeWeirdIndex < 80.0f)
+        herbSpeed = MathUtils::randomFloat(40.0f, 50.0f); // 60% chance for Normal and common creature speed
+    else if (extremeWeirdIndex < 95.0f)
+        herbSpeed = MathUtils::randomFloat(50.0f, 55.0f); // 15% chance for above average speed
+    else if (extremeWeirdIndex < 99.5f)
+        herbSpeed = MathUtils::randomFloat(55.0f, 70.0f); // 4.5% chance for high speed
+    else
+        herbSpeed = MathUtils::randomFloat(70.0f, 100.0f); // 0.5% for Extremely high speed
+
+    // Speed debugger
+    if (herbSpeed > 55.0f)
+        std::cout << "Abnormally High Speed (herb): " + std::to_string(herbSpeed) << "\n";
+    if (herbSpeed < 35.0f)
+        std::cout << "Abnormally Low Speed (herb): " + std::to_string(herbSpeed) << "\n";
+
+    brain.dna.setSpeed(herbSpeed);
 }
 
 // ====================== Update Herbivore ======================
