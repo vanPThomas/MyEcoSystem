@@ -8,8 +8,15 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     brain.dna.setAggression(0.2f);
     brain.dna.setGregariousness(0.8f);  // herbivores like to stay in groups
     brain.dna.setMetabolism(35.0f);     // lower metabolism
+    
+    randomStrength();
+    randomSpeed();
+}
 
-    // give herbivore random strength
+// ====================== Constructor functions ======================
+// give herbivore random strength
+void Herbivore::randomStrength()
+{
     float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
     float herbStrength = 0.0f;
     if (extremeWeirdIndex < 0.5f)
@@ -34,9 +41,12 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
         std::cout << "Abnormally Low Strength (herb): " + std::to_string(herbStrength) << "\n";
 
     brain.dna.setStrength(herbStrength);
+}
 
-    // give herbivore random speed
-    extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+// give herbivore random speed
+void Herbivore::randomSpeed()
+{
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
     float herbSpeed = 0.0f;
     if (extremeWeirdIndex < 0.5f)
         herbSpeed = MathUtils::randomFloat(0.0f, 30.0f); // 0.5% chance for extremely slow speed

@@ -18,4 +18,8 @@ private:
     void moveTowardsTarget(float deltaTime);
     void eatTarget();
 
+    // ====================== Constructor functions ======================
+    void randomStrength();
+    void randomSpeed();
+
 };

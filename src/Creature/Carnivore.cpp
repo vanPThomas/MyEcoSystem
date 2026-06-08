@@ -7,8 +7,16 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
     brain.dna.setAggression(0.85f);     // much more aggressive
     brain.dna.setMetabolism(65.0f);     // higher metabolism (needs more food) 
     brain.dna.setVisionRange(220.0f);   // better vision for hunting
+    
+    randomStrength();
+    randomSpeed();
 
-    // give Carnivore random strength
+}
+
+// ====================== Constructor functions ======================
+// give Carnivore random strength
+void Carnivore::randomStrength()
+{
     float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
     float CarnStrength = 0.0f;
     if (extremeWeirdIndex < 0.5f)
@@ -33,9 +41,12 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
         std::cout << "Abnormally Low Strength (carn): " + std::to_string(CarnStrength) << "\n";
 
     brain.dna.setStrength(CarnStrength);
+}
 
-    // give Carnivore random speed
-    extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+// give Carnivore random speed
+void Carnivore::randomSpeed()
+{
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
     float CarnSpeed = 0.0f;
     if (extremeWeirdIndex < 0.5f)
         CarnSpeed = MathUtils::randomFloat(0.0f, 40.0f); // 0.5% chance for extremely slow speed
@@ -59,7 +70,6 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
         std::cout << "Abnormally Low Speed (carn): " + std::to_string(CarnSpeed) << "\n";
 
     brain.dna.setSpeed(CarnSpeed);
-
 }
 
 // ====================== Update Carnivore ======================

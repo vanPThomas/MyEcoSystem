@@ -23,6 +23,10 @@ private:
     void findNearestPlant();
     void moveTowardsTarget(float deltaTime);
     void eatTarget();
+
+    // ====================== Constructor functions ======================
+    void randomStrength();
+    void randomSpeed();
     
     float energyPerHealthPoint = 0.5f;
     float originalHealthPoints = 100.0f;
