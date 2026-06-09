@@ -95,7 +95,7 @@ void Herbivore::randomHealth()
     maxHealth = health;
 
     // Health debugger
-    if (health > 150.0f)
+    if (health > 170.0f)
         std::cout << "Abnormally High Health (Herb): " + std::to_string(health) << "\n";
     if (health < 120.0f)
         std::cout << "Abnormally Low Health (Herb): " + std::to_string(health) << "\n";
