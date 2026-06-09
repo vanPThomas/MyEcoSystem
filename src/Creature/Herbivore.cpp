@@ -11,6 +11,7 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     
     randomStrength();
     randomSpeed();
+    randomHealth();
 }
 
 // ====================== Constructor functions ======================
@@ -70,6 +71,34 @@ void Herbivore::randomSpeed()
         std::cout << "Abnormally Low Speed (herb): " + std::to_string(herbSpeed) << "\n";
 
     brain.dna.setSpeed(herbSpeed);
+}
+
+void Herbivore::randomHealth()
+{
+    // give creature random health
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    if (extremeWeirdIndex < 0.5f)
+        health = MathUtils::randomFloat(0.0f, 100.0f); // 0.5% chance for extremely weak health
+    else if (extremeWeirdIndex < 5.0f)
+        health = MathUtils::randomFloat(100.0f, 120.0f); // 4.5% chance for weak Health
+    else if (extremeWeirdIndex < 20.0f)
+        health = MathUtils::randomFloat(120.0f, 140.0f); // 15% chance for below average health
+    else if (extremeWeirdIndex < 80.0f)
+        health = MathUtils::randomFloat(140.0f, 150.0f); // 60% chance for Normal and common creature health
+    else if (extremeWeirdIndex < 95.0f)
+        health = MathUtils::randomFloat(150.0f, 170.0f); // 15% chance for above average Health
+    else if (extremeWeirdIndex < 99.5f)
+        health = MathUtils::randomFloat(170.0f, 200.0f); // 4.5% chance for strong Health
+    else
+        health = MathUtils::randomFloat(200.0f, 300.0f); //0.5% for Extremely strong extremely healthy
+
+    maxHealth = health;
+
+    // Health debugger
+    if (health > 150.0f)
+        std::cout << "Abnormally High Health (Herb): " + std::to_string(health) << "\n";
+    if (health < 120.0f)
+        std::cout << "Abnormally Low Health (Herb): " + std::to_string(health) << "\n";
 }
 
 // ====================== Update Herbivore ======================

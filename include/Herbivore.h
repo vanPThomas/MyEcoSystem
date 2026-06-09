@@ -27,6 +27,8 @@ private:
     // ====================== Constructor functions ======================
     void randomStrength();
     void randomSpeed();
+    void randomHealth();
+
     
     float energyPerHealthPoint = 0.5f;
     float originalHealthPoints = 100.0f;

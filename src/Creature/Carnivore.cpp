@@ -10,6 +10,7 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
     
     randomStrength();
     randomSpeed();
+    randomHealth();
 
 }
 
@@ -70,6 +71,34 @@ void Carnivore::randomSpeed()
         std::cout << "Abnormally Low Speed (carn): " + std::to_string(CarnSpeed) << "\n";
 
     brain.dna.setSpeed(CarnSpeed);
+}
+
+void Carnivore::randomHealth()
+{
+    // give creature random health
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    if (extremeWeirdIndex < 0.5f)
+        health = MathUtils::randomFloat(0.0f, 40.0f); // 0.5% chance for extremely weak health
+    else if (extremeWeirdIndex < 5.0f)
+        health = MathUtils::randomFloat(40.0f, 70.0f); // 4.5% chance for weak Health
+    else if (extremeWeirdIndex < 20.0f)
+        health = MathUtils::randomFloat(70.0f, 90.0f); // 15% chance for below average health
+    else if (extremeWeirdIndex < 80.0f)
+        health = MathUtils::randomFloat(90.0f, 110.0f); // 60% chance for Normal and common creature health
+    else if (extremeWeirdIndex < 95.0f)
+        health = MathUtils::randomFloat(110.0f, 130.0f); // 15% chance for above average Health
+    else if (extremeWeirdIndex < 99.5f)
+        health = MathUtils::randomFloat(130.0f, 160.0f); // 4.5% chance for strong Health
+    else
+        health = MathUtils::randomFloat(160.0f, 250.0f); //0.5% for Extremely strong extremely healthy
+
+    maxHealth = health;
+
+    // Health debugger
+    if (health > 130.0f)
+        std::cout << "Abnormally High Health (Carn): " + std::to_string(health) << "\n";
+    if (health < 70.0f)
+        std::cout << "Abnormally Low Health (Carn): " + std::to_string(health) << "\n";
 }
 
 // ====================== Update Carnivore ======================

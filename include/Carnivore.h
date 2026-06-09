@@ -21,5 +21,6 @@ private:
     // ====================== Constructor functions ======================
     void randomStrength();
     void randomSpeed();
+    void randomHealth();
 
 };
