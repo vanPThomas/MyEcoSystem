@@ -7,11 +7,11 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     // Herbivore-specific default DNA adjustments
     brain.dna.setAggression(0.2f);
     brain.dna.setGregariousness(0.8f);  // herbivores like to stay in groups
-    brain.dna.setMetabolism(35.0f);     // lower metabolism
     
     randomStrength();
     randomSpeed();
     randomHealth();
+    randomMetabolism();
 }
 
 // ====================== Constructor functions ======================
@@ -73,6 +73,7 @@ void Herbivore::randomSpeed()
     brain.dna.setSpeed(herbSpeed);
 }
 
+// Give Herbivore random Health
 void Herbivore::randomHealth()
 {
     // give creature random health
@@ -99,6 +100,36 @@ void Herbivore::randomHealth()
         std::cout << "Abnormally High Health (Herb): " + std::to_string(health) << "\n";
     if (health < 120.0f)
         std::cout << "Abnormally Low Health (Herb): " + std::to_string(health) << "\n";
+}
+
+void Herbivore::randomMetabolism()
+{
+    // give creature random health
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float herbMetabolism = 35.0f;
+
+    if (extremeWeirdIndex < 0.5f)
+        herbMetabolism = MathUtils::randomFloat(0.0f, 20.0f); // 0.5% chance for extremely low Metabolism
+    else if (extremeWeirdIndex < 5.0f)
+        herbMetabolism = MathUtils::randomFloat(20.0f, 25.0f); // 4.5% chance for low Metabolism
+    else if (extremeWeirdIndex < 20.0f)
+        herbMetabolism = MathUtils::randomFloat(25.0f, 30.0f); // 15% chance for below average Metabolism
+    else if (extremeWeirdIndex < 80.0f)
+        herbMetabolism = MathUtils::randomFloat(30.0f, 40.0f); // 60% chance for Normal and common Metabolism
+    else if (extremeWeirdIndex < 95.0f)
+        herbMetabolism = MathUtils::randomFloat(45.0f, 50.0f); // 15% chance for above average metabolism
+    else if (extremeWeirdIndex < 99.5f)
+        herbMetabolism = MathUtils::randomFloat(50.0f, 55.0f); // 4.5% chance for high Metabolism
+    else
+        herbMetabolism = MathUtils::randomFloat(55.0f, 75.0f); //0.5% for Extremely high Metabolism
+
+    // Metabolism debugger
+    if (herbMetabolism > 50.0f)
+        std::cout << "Abnormally High Metabolism (Herb): " + std::to_string(herbMetabolism) << "\n";
+    if (herbMetabolism < 25.0f)
+        std::cout << "Abnormally Low Metabolism (Herb): " + std::to_string(herbMetabolism) << "\n";
+
+    brain.dna.setMetabolism(herbMetabolism);
 }
 
 // ====================== Update Herbivore ======================

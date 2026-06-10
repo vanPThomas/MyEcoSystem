@@ -22,5 +22,6 @@ private:
     void randomStrength();
     void randomSpeed();
     void randomHealth();
+    void randomMetabolism();
 
 };

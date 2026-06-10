@@ -5,12 +5,12 @@ Carnivore::Carnivore(Environment& environment, float startX, float startY)
 {
     // Carnivore-specific DNA defaults
     brain.dna.setAggression(0.85f);     // much more aggressive
-    brain.dna.setMetabolism(65.0f);     // higher metabolism (needs more food) 
     brain.dna.setVisionRange(220.0f);   // better vision for hunting
     
     randomStrength();
     randomSpeed();
     randomHealth();
+    randomMetabolism();
 
 }
 
@@ -99,6 +99,36 @@ void Carnivore::randomHealth()
         std::cout << "Abnormally High Health (Carn): " + std::to_string(health) << "\n";
     if (health < 70.0f)
         std::cout << "Abnormally Low Health (Carn): " + std::to_string(health) << "\n";
+}
+
+void Carnivore::randomMetabolism()
+{
+    // give creature random health
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    float herbMetabolism = 35.0f;
+
+    if (extremeWeirdIndex < 0.5f)
+        herbMetabolism = MathUtils::randomFloat(15.0f, 45.0f); // 0.5% chance for extremely low Metabolism
+    else if (extremeWeirdIndex < 5.0f)
+        herbMetabolism = MathUtils::randomFloat(45.0f, 55.0f); // 4.5% chance for low Metabolism
+    else if (extremeWeirdIndex < 20.0f)
+        herbMetabolism = MathUtils::randomFloat(55.0f, 60.0f); // 15% chance for below average Metabolism
+    else if (extremeWeirdIndex < 80.0f)
+        herbMetabolism = MathUtils::randomFloat(60.0f, 70.0f); // 60% chance for Normal and common Metabolism
+    else if (extremeWeirdIndex < 95.0f)
+        herbMetabolism = MathUtils::randomFloat(70.0f, 75.0f); // 15% chance for above average metabolism
+    else if (extremeWeirdIndex < 99.5f)
+        herbMetabolism = MathUtils::randomFloat(75.0f, 85.0f); // 4.5% chance for high Metabolism
+    else
+        herbMetabolism = MathUtils::randomFloat(85.0f, 120.0f); //0.5% for Extremely high Metabolism
+
+    // Metabolism debugger
+    if (herbMetabolism > 75.0f)
+        std::cout << "Abnormally High Metabolism (Carn): " + std::to_string(herbMetabolism) << "\n";
+    if (herbMetabolism < 55.0f)
+        std::cout << "Abnormally Low Metabolism (Carn): " + std::to_string(herbMetabolism) << "\n";
+
+    brain.dna.setMetabolism(herbMetabolism);
 }
 
 // ====================== Update Carnivore ======================
