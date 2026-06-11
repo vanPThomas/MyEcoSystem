@@ -12,6 +12,7 @@ Herbivore::Herbivore(Environment& environment, float startX, float startY)
     randomSpeed();
     randomHealth();
     randomMetabolism();
+    randomEnergyPerHealthPoint();
 }
 
 // ====================== Constructor functions ======================
@@ -131,6 +132,33 @@ void Herbivore::randomMetabolism()
 
     brain.dna.setMetabolism(herbMetabolism);
 }
+
+// Random Energy per health point
+void Herbivore::randomEnergyPerHealthPoint()
+{
+    float extremeWeirdIndex = MathUtils::randomFloat(0, 100.0f);
+    if (extremeWeirdIndex < 0.5f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.0f, 0.35f); // 0.5% chance for extremely slow speed
+    else if (extremeWeirdIndex < 5.0f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.35f, 0.4f); // 4.5% chance for slow speed
+    else if (extremeWeirdIndex < 20.0f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.4f, 0.45f); // 15% chance for below average speed
+    else if (extremeWeirdIndex < 80.0f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.45f, 0.55f); // 60% chance for Normal and common creature speed
+    else if (extremeWeirdIndex < 95.0f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.55f, 0.6f); // 15% chance for above average speed
+    else if (extremeWeirdIndex < 99.5f)
+        energyPerHealthPoint = MathUtils::randomFloat(0.6f, 0.75f); // 4.5% chance for high speed
+    else
+        energyPerHealthPoint = MathUtils::randomFloat(0.75f, 1.05f); // 0.5% for Extremely high speed
+
+    // Speed debugger
+    if (energyPerHealthPoint > 0.6f)
+        std::cout << "Abnormally High energyPerHealthPoint (herb): " + std::to_string(energyPerHealthPoint) << "\n";
+    if (energyPerHealthPoint < 0.4f)
+        std::cout << "Abnormally Low energyPerHealthPoint (herb): " + std::to_string(energyPerHealthPoint) << "\n";
+}
+
 
 // ====================== Update Herbivore ======================
 void Herbivore::update(float deltaTime)

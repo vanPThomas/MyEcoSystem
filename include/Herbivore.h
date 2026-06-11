@@ -29,7 +29,7 @@ private:
     void randomSpeed();
     void randomHealth();
     void randomMetabolism();
-
+    void randomEnergyPerHealthPoint();
     
     float energyPerHealthPoint = 0.5f;
     float edibleHealthPoints = 100.0f;
