@@ -247,7 +247,7 @@ void Carnivore::moveTowardsTarget(float deltaTime)
 void Carnivore::eatTarget()
 {
     // Eat the herbivore!
-    energy += targetHerbivore->getOriginalHealthPoints() * targetHerbivore->getEnergyPerHealthPoint();
+    energy += targetHerbivore->getEdibleHealthPoints() * targetHerbivore->getEnergyPerHealthPoint();
     targetHerbivore->setEaten(true);
     targetHerbivore = nullptr;
     brain.setCurrentState(Brain::State::Wandering);
